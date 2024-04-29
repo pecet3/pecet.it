@@ -1,5 +1,5 @@
 export const PL = {
-    greetings:
-        "Powiększ na maxa wydajność i optymalizacje <br> swojego biznesu."
+    code:
+        "<body> <p> Hej jestem Jakub i chętnie <br> zrobię dla Ciebie ładną stronę. <br> Po taniości!</p> </body>"
     ,
 }
