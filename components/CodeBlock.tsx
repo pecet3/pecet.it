@@ -4,10 +4,10 @@ import Typewriter from 'typewriter-effect';
 
 export const CodeBlock = () => {
     return (
-        <div className="font-mono text-base sm:text-xl w-72 sm:w-96 
+        <div className="font-mono text-base sm:text-xl w-96 
         bg-slate-700 px-2 py-4 rounded-lg  border-t-[20px] border-4 border-slate-200 
         shadow-lg shadow-black
-        grid grid-cols-[32px_minmax(400px,_1fr)_100px] gap-0 relative">
+        grid grid-cols-[32px_minmax(360px,_1fr)_100px] gap-0 relative">
             <div className="absolute flex gap-1 -top-4">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
@@ -36,7 +36,7 @@ export const CodeBlock = () => {
             </div>
             <div>
                 <p className="text-fuchsia-400">&lt;div&gt; </p>
-                <div className="text-lime-300 pl-4">
+                <div className="text-lime-300 pl-6">
                     <Typewriter
                         options={{
                             strings: `
