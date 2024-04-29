@@ -8,7 +8,7 @@ export const LogoTyping = () => {
                 options={{
                     strings: PL.greetings,
                     autoStart: true,
-                    delay: 60,
+                    delay: 40,
 
                 }}
             />
