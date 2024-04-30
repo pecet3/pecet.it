@@ -6,7 +6,7 @@ export const CodeBlock = () => {
     const rangeArray = Array.from({ length: 15 }, (_, index) => index + 1);
 
     return (
-        <div className="font-mono text-sm sm:text-base  w-80 sm:w-[28rem] 
+        <div className="font-mono text-sm sm:text-base  w-80 sm:w-[30rem] 
         bg-slate-700 px-2 py-2 rounded-lg  border-t-[20px] border-4 border-slate-200 
         shadow-lg shadow-black
         grid grid-cols-[32px_minmax(0px,_1fr)] gap-0 relative">
@@ -43,7 +43,7 @@ export const CodeBlock = () => {
                     piękną stronę internetową!`
                                     ,
                                     autoStart: true,
-                                    delay: 40,
+                                    delay: 20,
 
                                 }}
                             />
