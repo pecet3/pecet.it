@@ -6,7 +6,7 @@ export const CodeBlock = () => {
     const rangeArray = Array.from({ length: 15 }, (_, index) => index + 1);
 
     return (
-        <div className="font-mono text-sm sm:text-base  w-80 sm:w-[30rem] 
+        <div className="font-mono text-sm md:text-base  w-80 md:w-[30rem] 
         bg-slate-700 px-2 py-2 rounded-lg  border-t-[20px] border-4 border-slate-200 
         shadow-lg shadow-black
         grid grid-cols-[32px_minmax(0px,_1fr)] gap-0 relative">
@@ -51,10 +51,6 @@ export const CodeBlock = () => {
                     </HTMLelement>
 
                 </HTMLelement>
-
-
-
-
             </div>
         </div >
     )
@@ -72,13 +68,13 @@ const HTMLelement: React.FC<HTMLelementProps> = ({ element, classes, lang, child
         <div>
             <p className="text-fuchsia-400">
                 &lt;{element}{classes ? <b className="text-teal-400"> class
-                    <b className="text-sky-400">=</b>
+                    <b className="text-amber-400">=</b>
                     <b className='text-red-400'>"{classes}"</b></b> : null}
                 {lang ? <b className="text-teal-400"> lang
-                    <b className="text-sky-400">=</b>
+                    <b className="text-amber-400">=</b>
                     <b className='text-red-400'>"{lang}"</b></b> : null}&gt;
             </p>
-            <div className='pl-4 text-lime-300'> {children}</div>
+            <div className='pl-6 text-white font-extrabold'> {children}</div>
             <p className="text-fuchsia-400">&lt;/{element}&gt;</p>
         </div>
     );
