@@ -6,9 +6,9 @@ export const CodeBlock = () => {
     const rangeArray = Array.from({ length: 15 }, (_, index) => index + 1);
 
     return (
-        <div className="font-mono text-sm md:text-base  w-80 md:w-[30rem] 
+        <div className="font-mono text-sm md:text-base  w-96 md:w-[30rem] 
         bg-slate-700 px-2 py-2 rounded-lg  border-t-[20px] border-4 border-slate-200 
-        shadow-lg shadow-black
+        shadow-lg shadow-black z-0
         grid grid-cols-[32px_minmax(0px,_1fr)] gap-0 relative">
             <div className="absolute flex gap-1 -top-4">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -26,7 +26,7 @@ export const CodeBlock = () => {
                         <p className="text-fuchsia-400">
                             &lt;meta
                             <b className="text-teal-400"> charset
-                                <b className="text-sky-400">=</b>
+                                <b className="text-amber-400">=</b>
                                 <b className='text-red-400'>"utf-8"</b></b>&gt;
                         </p>
                         <HTMLelement element='title' >
