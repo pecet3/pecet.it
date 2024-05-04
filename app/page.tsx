@@ -177,24 +177,25 @@ export default function Home() {
 
       </motion.section>
       {
-        scrollY >= screenSize.height * 0.5 ? <motion.div
-          initial={{ opacity: 0, scale: 0, x: 200, y: 200 }}
-          animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className=" font-bold text-xl bottom-4 right-4 fixed
-      duration-300 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="relative text-sm px-1 py-0.5 top-0 bg-slate-700 rounded-l-lg">
-            Napisz maila
-          </motion.div>
-          <button className="z-50 rounded-xl hover:bg-blue-500 p-2  bg-blue-600">
-            <MdOutlineEmail size={40} />
-          </button>
+        scrollY >= screenSize.height * 0.5 ? <motion.button
+          animate={{
+            scale: [0.9, 1.2, 1],
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "mirror",
+          }}
 
-        </motion.div>
+          className=" font-bold text-xl bottom-4 right-4 fixed
+      duration-300 flex items-center justify-center
+      hover:bg-blue-500 p-2  bg-blue-600 rounded-xl">
+
+          <MdOutlineEmail size={40} />
+
+
+        </motion.button>
           : null
       }
       <div className="h-96">a</div>
