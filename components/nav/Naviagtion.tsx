@@ -35,12 +35,7 @@ export const Navigation = () => {
                 // Blog
                 </div>
             </motion.nav>
-            {
-                scrollY >= screenSize.height * 0.5 ? <div className="fixed bottom-4 right-4">
-                    Napisz do mnie
-                </div>
-                    : null
-            }
+
         </>
     )
 }

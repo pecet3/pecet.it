@@ -24,20 +24,33 @@ export default function Home() {
 
   const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation()
+  const [scrollY, setScrollY] = useState(0);
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
+  const handleScroll = () => {
+    setScrollY(window.scrollY);
+
+  };
 
   useEffect(() => {
-    if (isInView) {
+    window.addEventListener("scroll", handleScroll);
+    const { width, height } = window.screen;
+    setScreenSize({ width, height });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (scrollY > 200) {
       mainControls.start("visible")
     }
-  }, [isInView])
+    if (scrollY < 300) {
+      mainControls.start("hidden")
+    }
+  }, [scrollY])
 
   const [isMobile, setIsMobile] = useState(getIsMobile())
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -56,8 +69,6 @@ export default function Home() {
     };
   }, []);
 
-
-  console.log(isMobile)
   return (
     <main
       className="flex min-h-screen flex-col items-center justify-center pt-48 sm:pt-0 px-8 lg:px-24 xl:px-64 pb-16">
@@ -80,7 +91,7 @@ export default function Home() {
                 className="px-3 py-2 rounded-xl font-bold text-xl
              hover:bg-blue-500 duration-300 gap-1 bg-blue-600 flex items-center justify-center">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.5 }}
+                  initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 1, delay: 4.5, ease: "easeOut" }}
                 >
@@ -136,13 +147,13 @@ export default function Home() {
       <motion.section
         ref={ref}
         variants={{
-          hidden: { scale: 0, opacity: 0, y: -220 },
+          hidden: { scale: 0, opacity: 0, y: 0 },
           visible: { scale: 1, opacity: 1, y: 0 }
         }}
         initial="hidden"
         animate={mainControls}
         transition={{
-          duration: 1, delay: 0.6
+          duration: 0.5, delay: 0
         }}
         className="text-4xl h-screen  border-white rounded-2xl border-[6px] my-8">
         <div className="font-mono w-full border-b-[6px] border-white p-4 flex justify-between">
@@ -165,7 +176,28 @@ export default function Home() {
         </div>
 
       </motion.section>
+      {
+        scrollY >= screenSize.height * 0.5 ? <motion.div
+          initial={{ opacity: 0, scale: 0, x: 200, y: 200 }}
+          animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className=" font-bold text-xl bottom-4 right-4 fixed
+      duration-300 flex items-center justify-center">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="relative text-sm px-1 py-0.5 top-0 bg-slate-700 rounded-l-lg">
+            Napisz maila
+          </motion.div>
+          <button className="z-50 rounded-xl hover:bg-blue-500 p-2  bg-blue-600">
+            <MdOutlineEmail size={40} />
+          </button>
 
+        </motion.div>
+          : null
+      }
+      <div className="h-96">a</div>
     </main >
   );
 }
