@@ -72,7 +72,7 @@ const HTMLelement: React.FC<HTMLelementProps> = ({ element, classes, lang, child
                     <b className='text-red-400'>&quot;{classes}&quot;</b></b> : null}
                 {lang ? <b className="text-teal-400"> lang
                     <b className="text-amber-400">=</b>
-                    <b className='text-red-400'>&quot;"{lang}&quot;</b></b> : null}&gt;
+                    <b className='text-red-400'>&quot;{lang}&quot;</b></b> : null}&gt;
             </p>
             <div className='pl-6 text-white font-extrabold'> {children}</div>
             <p className="text-fuchsia-400">&lt;/{element}&gt;</p>
