@@ -1,8 +1,25 @@
 "use client"
+import { useEffect, useRef, useState } from "react"
 import { Logo } from "../Logo"
 import { motion } from "framer-motion"
 
 export const Navigation = () => {
+    const [scrollY, setScrollY] = useState(0);
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    const handleScroll = () => {
+        setScrollY(window.scrollY);
+
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        const { width, height } = window.screen;
+        setScreenSize({ width, height });
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
     return (
         <>
             <motion.nav
@@ -18,9 +35,12 @@ export const Navigation = () => {
                 // Blog
                 </div>
             </motion.nav>
-            <div className="fixed bottom-4 right-4">
-                Napisz do mnie
-            </div>
+            {
+                scrollY >= screenSize.height * 0.5 ? <div className="fixed bottom-4 right-4">
+                    Napisz do mnie
+                </div>
+                    : null
+            }
         </>
     )
 }
