@@ -136,13 +136,13 @@ export default function Home() {
       <motion.section
         ref={ref}
         variants={{
-          hidden: { opacity: 0, x: -220 },
-          visible: { opacity: 1, x: 0 }
+          hidden: { scale: 0, opacity: 0, y: -220 },
+          visible: { scale: 1, opacity: 1, y: 0 }
         }}
         initial="hidden"
         animate={mainControls}
         transition={{
-          duration: 1.4, delay: 0.6
+          duration: 1, delay: 0.6
         }}
         className="text-4xl h-screen  border-white rounded-2xl border-[6px] my-8">
         <div className="font-mono w-full border-b-[6px] border-white p-4 flex justify-between">
@@ -158,38 +158,6 @@ export default function Home() {
           <Image src="/myFace.jpg" width={480} height={480} alt="my face. I wear a "
             className="rounded-full border-[6px] shadow-xl h-64 sm:h-72 w-72 sm:w-72 shadow-gray-800 border-white
           mt-8 mr-8 my-8" />
-
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim adipisci tenetur sequi provident perferendis porro, ut exercitationem natus,
-          dolorum quasi minus, accusantium amet rerum unde. Provident inventore optio nulla facilis?
-
-        </div>
-
-      </motion.section>
-      <motion.section
-        ref={ref}
-        variants={{
-          hidden: { opacity: 0, x: -220 },
-          visible: { opacity: 1, x: 0 }
-        }}
-        initial="hidden"
-        animate={mainControls}
-        transition={{
-          duration: 1.4, delay: 0.6
-        }}
-        className="text-4xl h-screen  border-white rounded-2xl border-[6px] my-8">
-        <div className="font-mono w-full border-b-[6px] border-white p-4 flex justify-between">
-          C:\Projects
-          <div className="flex justify-end gap-2">
-            <div className="border-b-4 border-white w-6 mb-2.5"></div>
-
-            <PiSubtractSquareDuotone />
-            <IoClose />
-          </div>
-        </div>
-        <div className="px-4 grid h-max grid-cols-[255px_minmax(0px,_1fr)] md:flex-row-reverse items-center m-auto ">
-          <div
-            className="border-r-2 border-white 
-       ">test</div>
 
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim adipisci tenetur sequi provident perferendis porro, ut exercitationem natus,
           dolorum quasi minus, accusantium amet rerum unde. Provident inventore optio nulla facilis?
