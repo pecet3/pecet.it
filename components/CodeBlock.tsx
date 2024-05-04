@@ -27,7 +27,7 @@ export const CodeBlock = () => {
                             &lt;meta
                             <b className="text-teal-400"> charset
                                 <b className="text-amber-400">=</b>
-                                <b className='text-red-400'>"utf-8"</b></b>&gt;
+                                <b className='text-red-400'>&quot;utf-8&quot;</b></b>&gt;
                         </p>
                         <HTMLelement element='title' >
                             Twoja wymarzona strona
@@ -69,10 +69,10 @@ const HTMLelement: React.FC<HTMLelementProps> = ({ element, classes, lang, child
             <p className="text-fuchsia-400">
                 &lt;{element}{classes ? <b className="text-teal-400"> class
                     <b className="text-amber-400">=</b>
-                    <b className='text-red-400'>"{classes}"</b></b> : null}
+                    <b className='text-red-400'>&quot;{classes}&quot;</b></b> : null}
                 {lang ? <b className="text-teal-400"> lang
                     <b className="text-amber-400">=</b>
-                    <b className='text-red-400'>"{lang}"</b></b> : null}&gt;
+                    <b className='text-red-400'>&quot;"{lang}&quot;</b></b> : null}&gt;
             </p>
             <div className='pl-6 text-white font-extrabold'> {children}</div>
             <p className="text-fuchsia-400">&lt;/{element}&gt;</p>
