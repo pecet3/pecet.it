@@ -174,7 +174,7 @@ export default function Home() {
         <div className="px-4 flex flex-col md:flex-row-reverse items-center m-auto text-2xl
          md:text-4xl p-2 sm:p-4 ">
           <Image src="/myFace.jpg" width={480} height={480} alt="my face"
-            className="rounded-full border-[6px] shadow-xl h-64 sm:h-72 w-72 sm:w-72 shadow-gray-800 border-white
+            className="rounded-full border-[6px] shadow-xl h-48 sm:h-72 w-48 sm:w-72 shadow-gray-800 border-white
           " />
 
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim adipisci tenetur sequi provident perferendis porro, ut exercitationem natus,
@@ -183,8 +183,8 @@ export default function Home() {
         </div>
         <div className="px-4 flex flex-col md:flex-row gap-4 items-center m-auto text-2xl 
         md:text-4xl p-2 sm:p-4">
-          <Image src="/space-invaders.jpg" width={480} height={480} alt=" "
-            className=" h-64 sm:h-72 w-72 sm:w-72
+          <Image src="/space-invaders.jpg" width={480} height={480} alt="space invaders logo"
+            className=" h-48 sm:h-72 w-48 sm:w-72
              shadow-gray-800 
           " />
 
@@ -226,9 +226,6 @@ export default function Home() {
 
           </motion.div>
         </motion.button>
-
-
-
           : null
       }
       {
