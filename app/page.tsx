@@ -14,6 +14,13 @@ import { Mailme } from "@/components/Mailme";
 
 export default function Home() {
   const ref = useRef(null);
+  const [isMailme, setIsMailme] = useState(false)
+
+  useEffect(() => {
+    window.history.pushState(null, "", `?mailme=${isMailme}`)
+  }, [isMailme])
+
+
   const getIsMobile = () => {
     const width = window.innerWidth
     if (width < 800) {
@@ -22,17 +29,13 @@ export default function Home() {
       return false
     }
   };
-
-  const isInView = useInView(ref, { once: true })
-  const mainControls = useAnimation()
+  // scroll things
   const [scrollY, setScrollY] = useState(0);
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
   const handleScroll = () => {
     setScrollY(window.scrollY);
 
   };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     const { width, height } = window.screen;
@@ -41,6 +44,9 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // on scroll
+  const mainControls = useAnimation()
 
   useEffect(() => {
     if (scrollY > 200) {
@@ -127,8 +133,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 5 }}
-                className="px-3 py-2 rounded-xl font-bold text-xl
-             hover:bg-blue-500 duration-300 gap-1 bg-blue-600 flex items-center justify-center">
+                className="btn">
                 <MdOutlineEmail size={30} />
                 Napisz maila
               </motion.button>
@@ -168,7 +173,7 @@ export default function Home() {
         </div>
         <div className="px-4 flex flex-col md:flex-row-reverse items-center m-auto text-2xl
          md:text-4xl p-2 sm:p-4 ">
-          <Image src="/myFace.jpg" width={480} height={480} alt="my face. I wear a "
+          <Image src="/myFace.jpg" width={480} height={480} alt="my face"
             className="rounded-full border-[6px] shadow-xl h-64 sm:h-72 w-72 sm:w-72 shadow-gray-800 border-white
           " />
 
@@ -200,18 +205,51 @@ export default function Home() {
             repeat: Infinity,
             repeatType: "mirror",
           }}
-
+          onClick={() => setIsMailme(!isMailme)}
           className=" font-bold text-xl bottom-4 right-4 fixed
       duration-300 flex items-center justify-center
       hover:bg-blue-500 p-2  bg-blue-600 rounded-xl">
 
-          <MdOutlineEmail size={40} />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1],
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "mirror",
+            }}
+            className=" ">
 
+            <MdOutlineEmail size={40} />
 
+          </motion.div>
         </motion.button>
+
+
+
           : null
       }
-      <Mailme />
+      {
+        isMailme ?
+          <motion.section
+            initial={{ y: -400, }}
+            animate={{ y: 0, }}
+            transition={{ duration: 0.4 }}
+            className="bg-black w-full fixed top-0 right-0 bg-opacity-80 h-full backdrop-blur-sm
+            z-50 flex flex-col justify-center items-center font-mono px-8 lg:px-24 xl:px-64"
+          >
+            <Mailme />
+            <motion.button
+              initial={{ x: 0, opacity: 0, rotate: 0 }}
+              animate={{ x: 0, opacity: 1, rotate: 180 }}
+              transition={{ ease: "easeOut", duration: 0.3, delay: 0.4 }}
+              className="fixed z-50 top-4 right-4 " onClick={() => setIsMailme(false)}>
+              <IoClose size={32} />
+            </motion.button>
+          </motion.section> : null
+      }
     </main >
   );
 }

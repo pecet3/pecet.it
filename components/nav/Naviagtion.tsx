@@ -27,7 +27,7 @@ export const Navigation = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ ease: "easeOut", duration: 1, delay: 4.6 }}
                 className="flex items-center justify-between bg-opacity-75 bg-gray-700 
-            animate-fade-in fixed w-full py-2 px-4 duration-500 z-50 backdrop-blur-sm">
+            animate-fade-in fixed w-full py-2 px-4 duration-500 z-40 backdrop-blur-sm">
                 <Logo />
                 <div className="font-mono text-xl">
                     O Mnie

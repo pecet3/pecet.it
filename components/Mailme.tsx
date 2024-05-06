@@ -1,12 +1,15 @@
 export const Mailme = () => {
     return (
-        <section className="bg-black fixed top-0 right-0 bg-opacity-80  w-full h-full 
-        z-50 flex flex-col justify-center">
-            <form className="rouned-lg bg-slate-600 p-6 border-6 border-white
-             flex flex-col m-auto justify-center gap-6">
-                <input type="text" className="rounded-lg p-2 bg-slate-800" placeholder="Podaj swój email" />
-                <input type="input" className="rounded-lg p-2 bg-slate-800" placeholder="tresc maila" />
-            </form>
-        </section>
+
+        <form className="rounded-2xl bg-slate-600 p-4 border-[5px] border-white
+             flex flex-col m-auto justify-center gap-4 w-full ">
+            <input type="email" className="rounded-lg p-2 border-[5px] border-white
+                w-64 bg-slate-800" placeholder="Podaj swój email" />
+            <textarea rows={16}
+                className="rounded-lg p-2 border-[5px] border-white  resize-none bg-slate-800"
+                placeholder="tresc maila" />
+            <button type="submit" className="btn font-sans m-auto shadow-md shadow-gray-800">Wyślij</button>
+        </form>
+
     )
 }
