@@ -1,3 +1,6 @@
+import { BiMailSend } from "react-icons/bi"
+import { IoSend } from "react-icons/io5"
+
 export const Mailme = () => {
     return (
 
@@ -8,7 +11,8 @@ export const Mailme = () => {
             <textarea rows={16}
                 className="rounded-lg p-2 border-[5px] border-white  resize-none bg-slate-800"
                 placeholder="tresc maila" />
-            <button type="submit" className="btn font-sans m-auto shadow-md shadow-gray-800">Wyślij</button>
+            <button type="submit" className="btn-secondary font-sans m-auto bg-fuchsia-500">Wyślij
+                <BiMailSend size={28} /></button>
         </form>
 
     )
