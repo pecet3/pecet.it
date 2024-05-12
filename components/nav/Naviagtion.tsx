@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Logo } from "../Logo"
 import { motion } from "framer-motion"
+import { FaFacebook } from "react-icons/fa"
 
 export const Navigation = () => {
     const [scrollY, setScrollY] = useState(0);
@@ -38,4 +39,11 @@ export const Navigation = () => {
 
         </>
     )
+}
+
+export const BottomNav = () => {
+    return (
+        <div className="bg-gray-500 rounded-t-lg flex">
+            <FaFacebook />
+        </div>)
 }
