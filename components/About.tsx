@@ -24,7 +24,7 @@ export const About = forwardRef((props: AboutProps, ref: ForwardedRef<HTMLElemen
             transition={{
                 duration: 0.5, delay: 0
             }}
-            className="text-4xl border-white rounded-2xl border-[6px] my-8">
+            className="text-4xl border-white rounded-2xl border-[6px] my-8 max-w-6xl">
             <div className="font-mono w-full border-b-[6px] border-white p-4 flex justify-between">
                 C:\win32\O mnie
                 <div className="flex justify-end gap-2">

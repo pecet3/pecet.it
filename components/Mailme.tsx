@@ -15,11 +15,11 @@ export const Mailme = () => {
 
 
         <form className="rounded-2xl bg-slate-600 p-4 border-[5px] border-white
-             flex flex-col m-auto justify-end gap-4 w-full relative">
+             flex flex-col m-auto justify-end gap-4 w-full relative max-w-6xl">
             <div className="flex justify-end">
                 <input type="email" className="rounded-lg p-2 border-[5px] border-white
                 w-64 bg-slate-800" placeholder="Podaj swój email" />
-                <button type="submit" className="self-end btn-secondary m-auto font-sans m-auto bg-fuchsia-500">Wyślij
+                <button type="submit" className="self-end btn-secondary font-sans m-auto bg-fuchsia-500">Wyślij
                     <BiMailSend size={28} /></button>
             </div>
             <textarea rows={16}
