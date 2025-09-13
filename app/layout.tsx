@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/nav/Naviagtion";
 import { Toolbar } from "@/components/nav/Toolbar";
+import { MailmeOverlay } from "@/components/Mailme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + "text-white dark:text-white dark:bg-slate-800"}>
+      <body
+        className={
+          inter.className + "text-white dark:text-white dark:bg-slate-800"
+        }
+      >
         <Navigation />
-
+        <MailmeOverlay />
         {children}
       </body>
     </html>
