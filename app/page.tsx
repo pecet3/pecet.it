@@ -2,12 +2,10 @@
 
 import { motion, useAnimation } from "framer-motion";
 
-import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlineEmail, MdOutlineMarkEmailRead } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { IoClose } from "react-icons/io5";
-import { Mailme } from "@/components/Mailme";
 import { About } from "@/components/About";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
 
@@ -107,7 +105,7 @@ export default function Home() {
             }}
             className=" "
           >
-            <MdOutlineEmail size={40} />
+            <MdOutlineMarkEmailRead size={40} />
           </motion.div>
         </motion.button>
       ) : null}
