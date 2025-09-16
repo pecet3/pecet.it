@@ -31,15 +31,14 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ isMobile }) => {
               <h1 className="text-4xl font-semibold">
                 Przeraża Cię widok kodu?
               </h1>
-              <h2 className="text-5xl font-thin text-center">Zostaw to mi!</h2>
+              <h2 className="text-5xl font-thin text-center">Zostaw to nam!</h2>
             </div>
             <motion.button
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 4.5, ease: "easeOut" }}
               onClick={() => openMailme()}
-              className="px-3 py-2 rounded-xl font-bold text-xl
-             hover:bg-blue-500 duration-300 gap-1 bg-blue-600 flex items-center justify-center"
+              className="btn hover:scale-105 duration-300 hover:shadow-lg shadow-md shadow-gray-900"
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
@@ -72,14 +71,14 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ isMobile }) => {
               <h1 className="text-4xl font-semibold text-center">
                 Przeraża Cię widok kodu?
               </h1>
-              <h2 className="text-5xl font-thin text-center">Zostaw to mi!</h2>
+              <h2 className="text-5xl font-thin text-center">Zostaw to nam!</h2>
             </div>
             <motion.button
               onClick={() => openMailme()}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 5 }}
-              className="btn"
+              className="btn hover:scale-105 duration-300 hover:shadow-lg shadow-md shadow-gray-900"
             >
               <MdOutlineEmail size={30} />
               Napisz maila

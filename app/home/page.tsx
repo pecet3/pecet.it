@@ -1,6 +1,5 @@
-export default function page() {
+"use client";
 
-    return (
-        <p>hello</p>
-    );
+export default function page() {
+  return <p>hello</p>;
 }

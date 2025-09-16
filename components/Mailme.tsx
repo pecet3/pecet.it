@@ -121,7 +121,6 @@ export const MailmeOverlay = () => {
   const searchParams = useSearchParams();
   const [isMailme, setIsMailme] = useState(false);
 
-  // obserwuj query param
   useEffect(() => {
     setIsMailme(searchParams.get("mailme") === "true");
   }, [searchParams]);

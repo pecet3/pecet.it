@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/nav/Naviagtion";
-import { Toolbar } from "@/components/nav/Toolbar";
-import { MailmeOverlay } from "@/components/Mailme";
+import { Suspense } from "react";
+import { ScrollBackground } from "@/components/ScrollBackground";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={
-          inter.className + "text-white dark:text-white dark:bg-slate-800"
+          inter.className +
+          "text-white dark:text-white dark:bg-slate-800 bg-transparent/10"
         }
       >
-        <Navigation />
-        <MailmeOverlay />
-        {children}
+        <ScrollBackground>
+          <Navigation />
+          <Suspense>{children}</Suspense>
+        </ScrollBackground>
       </body>
     </html>
   );

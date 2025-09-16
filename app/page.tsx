@@ -2,12 +2,14 @@
 
 import { motion, useAnimation } from "framer-motion";
 
-import { MdOutlineEmail, MdOutlineMarkEmailRead } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { About } from "@/components/About";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
+import { MailmeOverlay } from "@/components/Mailme";
+import { OurStack } from "@/components/OurStack";
 
 export default function Home() {
   const ref = useRef(null);
@@ -49,7 +51,7 @@ export default function Home() {
     if (scrollY < 300) {
       mainControls.start("hidden");
     }
-  }, [scrollY]);
+  }, [scrollY, mainControls]);
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -76,7 +78,11 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center pt-48 sm:pt-0 px-8 lg:px-24 xl:px-64 pb-16">
       <WelcomeSection isMobile={isMobile} />
 
-      <About ref={ref} mainControls={mainControls} />
+      <div className="flex flex-col items-center gap-48 max-w-7xl">
+        <About ref={ref} mainControls={mainControls} />
+        <OurStack ref={ref} mainControls={mainControls} />
+        <div className="h-screen"></div>
+      </div>
       {scrollY >= screenSize.height * 0.5 ? (
         <motion.button
           animate={{
@@ -90,8 +96,9 @@ export default function Home() {
           }}
           onClick={openMailme}
           className=" font-bold text-xl bottom-4 right-4 fixed
-      duration-300 flex items-center justify-center
-      hover:bg-blue-500 p-2  bg-blue-600 rounded-xl"
+      duration-300 flex items-center justify-center hover:cursor-pointer
+      hover:bg-fuchsia-500 p-2  bg-fuchsia-600 rounded-xl hover:scale-105
+       hover:shadow-lg shadow-md shadow-gray-900"
         >
           <motion.div
             animate={{
@@ -103,12 +110,13 @@ export default function Home() {
               repeat: Infinity,
               repeatType: "mirror",
             }}
-            className=" "
+            className=" flex items-center flex-col"
           >
-            <MdOutlineMarkEmailRead size={40} />
+            <MdOutlineEmail size={48} />
           </motion.div>
         </motion.button>
       ) : null}
+      <MailmeOverlay />
     </main>
   );
 }

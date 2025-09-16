@@ -1,15 +1,7 @@
 import Image from "next/image";
 import { IoClose } from "react-icons/io5";
 import { PiSubtractSquareDuotone } from "react-icons/pi";
-import {
-  AnimationControls,
-  motion,
-  useAnimate,
-  useAnimation,
-  useInView,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { AnimationControls, motion } from "framer-motion";
 import React, { ForwardedRef, forwardRef } from "react";
 
 interface AboutProps {
@@ -23,7 +15,7 @@ export const About = forwardRef(
       <motion.section
         ref={ref}
         variants={{
-          hidden: { scale: 0, opacity: 0, y: 400 },
+          hidden: { scale: -0.2, opacity: 0.5, y: 400 },
           visible: { scale: 1, opacity: 1, y: 0 },
         }}
         initial="hidden"
@@ -82,3 +74,4 @@ export const About = forwardRef(
     );
   }
 );
+About.displayName = "About";
