@@ -11,6 +11,7 @@ const logos = [
   "/docker.svg",
   "/javascript.svg",
   "/wordpress.svg",
+  "/chatgpt.png",
 ];
 
 interface OurStackProps {

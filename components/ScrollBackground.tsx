@@ -15,23 +15,23 @@ export function ScrollBackground({ children }: { children: React.ReactNode }) {
       if (scrollPercent < 10) {
         setBgClass("bg-transparent/10");
       } else if (scrollPercent < 20) {
-        setBgClass("bg-black/5");
+        setBgClass("bg-emerald-950/5");
       } else if (scrollPercent < 30) {
-        setBgClass("bg-black/10");
+        setBgClass("bg-emerald-950/10");
       } else if (scrollPercent < 40) {
-        setBgClass("bg-black/20");
+        setBgClass("bg-emerald-950/20");
       } else if (scrollPercent < 50) {
-        setBgClass("bg-black/30");
+        setBgClass("bg-emerald-950/30");
       } else if (scrollPercent < 60) {
-        setBgClass("bg-black/40");
+        setBgClass("bg-emerald-950/40");
       } else if (scrollPercent < 70) {
-        setBgClass("bg-black/50");
+        setBgClass("bg-purple-950/10");
       } else if (scrollPercent < 80) {
-        setBgClass("bg-black/60");
+        setBgClass("bg-purple-950/20");
       } else if (scrollPercent < 90) {
-        setBgClass("bg-black/70");
+        setBgClass("bg-purple-950/30");
       } else {
-        setBgClass("bg-black/80");
+        setBgClass("bg-purple-950/30");
       }
     };
 
