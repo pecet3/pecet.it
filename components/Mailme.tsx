@@ -69,8 +69,8 @@ export const Mailer = ({
         >
           <form
             onSubmit={handleSubmit}
-            className="flex w-[56vh] flex-col gap-2 bg-white/10 rounded-lg backdrop-blur-sm
- bg- px-2 pb-2 border-2 items-start relative shadow-lg shadow-gray-800"
+            className="flex w-[56vh] flex-col gap-2 rounded-lg 0 
+ bg- px-2 pb-2 border backdrop-blur-sm bg-white/1 border-gray-400 items-start relative shadow-lg shadow-gray-800"
           >
             <div className="flex items-end pt-3 m-0 gap-1">
               {" "}
@@ -80,7 +80,7 @@ export const Mailer = ({
                 type="button" // Dodaj type="button", aby nie wysyłał formularza
               ></button>
               <button
-                className="w-4 h-4 bg-yellow-500 rounded-full"
+                className="w-4 h-4 bg-yellow-400 rounded-full"
                 type="button" // Dodaj type="button"
               ></button>
               <button
@@ -153,7 +153,7 @@ export const Mailer = ({
           onClick={() => setIsOpen(true)}
           className=" font-bold text-xl
       duration-1000 flex items-center justify-center hover:cursor-pointer
-      backdrop-blur-lg bg-white text-black p-2   rounded-xl hover:scale-105
+      backdrop-blur-lg bg-white/10  text-white border border-gray-400 p-2   rounded-xl hover:scale-105
        hover:shadow-lg shadow-md shadow-gray-900"
         >
           <motion.div

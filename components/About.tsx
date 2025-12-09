@@ -1,172 +1,148 @@
 import Image from "next/image";
-import { IoClose } from "react-icons/io5";
-import { PiSubtractSquareDuotone } from "react-icons/pi";
-import { AnimationControls, motion } from "framer-motion";
-import React, { ForwardedRef, forwardRef, useState } from "react";
-import { BsWordpress } from "react-icons/bs";
-import { FaCode, FaTabletAlt } from "react-icons/fa"; // Example icons
-import { IconType } from "react-icons"; // Type for react-icons
+import {
+  AnimationControls,
+  motion,
+  useAnimationControls,
+  useInView,
+  Variants,
+} from "framer-motion";
+import React, { ForwardedRef, forwardRef, useEffect, useRef } from "react";
+import { BsWordpress, BsGlobe } from "react-icons/bs";
+import { FaCode, FaTabletAlt } from "react-icons/fa";
+import { IconType } from "react-icons";
+import { SiN8N } from "react-icons/si";
+import { HiOutlineTerminal } from "react-icons/hi";
 
-// --- 1. Define Service Structure and Data ---
+// --- Typy i Dane ---
 
-// Define the shape of a single service item
-interface Service {
-  name: string;
+interface ServiceTileProps {
   icon: IconType;
-  content: React.ReactNode; // Use React.ReactNode for potentially complex content
+  title: string;
+  description: string;
 }
 
-// Define the keys for the services (used in the services hashmap and as state type)
-type ServiceKey = "wordpress" | "custom_dev" | "rwd"; // Extend this as needed
+const serviceData = [
+  {
+    icon: BsGlobe,
+    title: "Strony Internetowe",
+    description:
+      "Building robust, scalable applications using modern frameworks like React, Next.js, and Node.js.",
+  },
+  {
+    icon: SiN8N,
+    title: "Automatyzacje",
+    description:
+      "Expert integration and custom development for platforms like WordPress and various e-commerce solutions.",
+  },
+  {
+    icon: HiOutlineTerminal,
+    title: "Serwery",
+    description:
+      "Ensuring seamless, pixel-perfect user experiences across all devices, from mobile to desktop.",
+  },
+];
 
-// Define the services hashmap (Record)
-const services: Record<ServiceKey, Service> = {
-  wordpress: {
-    name: "Strona Wordpress",
-    icon: BsWordpress,
-    content: (
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">Wordpress</h3>
-        <p>
-          Tworzenie profesjonalnych stron internetowych opartych na systemie
-          **Wordpress**. Idealne dla blogów, małych i średnich firm. Łatwa
-          edycja treści za pomocą panelu administracyjnego.
-        </p>
-        <ul className="list-disc pl-6 mt-2 text-lg">
-          <li>Instalacja i konfiguracja</li>
-          <li>Wybór i dostosowanie motywu</li>
-          <li>Integracja niezbędnych wtyczek (SEO, bezpieczeństwo)</li>
-        </ul>
-      </div>
-    ),
+// 1. ZMODYFIKOWANE Warianty dla kontenera - Animacja Sekwencyjna
+const containerVariants: Variants = {
+  visible: {
+    transition: {
+      delayChildren: 0.1,
+      // ZMIANA: Ustawiamy staggerChildren na >= 0.6s (czas trwania animacji kafelka)
+      staggerChildren: 0.2, // Zapewnia pełny pop-up jednego kafelka, zanim rozpocznie się kolejny
+    },
   },
-  custom_dev: {
-    name: "Własny Projekt",
-    icon: FaCode,
-    content: (
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">
-          Własny Projekt (Custom Development)
-        </h3>
-        <p>
-          Budowanie **dedykowanych aplikacji webowych** i stron od podstaw
-          (React, Next.js, itp.). Pełna kontrola nad kodem i funkcjonalnością.
-        </p>
-        <ul className="list-disc pl-6 mt-2 text-lg">
-          <li>Frontend/Backend Development</li>
-          <li>Integracja z API</li>
-          <li>Skalowalne rozwiązania</li>
-        </ul>
-      </div>
-    ),
-  },
-  rwd: {
-    name: "Responsywność (RWD)",
-    icon: FaTabletAlt,
-    content: (
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2">Responsywność</h3>
-        <p>
-          Optymalizacja istniejących stron pod kątem **wyświetlania na
-          wszystkich urządzeniach** (desktopy, tablety, smartfony).
-        </p>
-        <ul className="list-disc pl-6 mt-2 text-lg">
-          <li>Mobile-First Design</li>
-          <li>Testowanie na różnych rozdzielczościach</li>
-          <li>Poprawa użyteczności mobilnej</li>
-        </ul>
-      </div>
-    ),
+  hidden: {},
+};
+
+// 2. Warianty dla pojedynczego kafelka (bez zmian w stosunku do poprzedniej wersji)
+const tileVariants: Variants = {
+  hidden: { y: 200, opacity: 0, scale: 0.0 },
+  visible: {
+    y: [30, 0],
+    opacity: [0, 1],
+    scale: [0.9, 1.2, 1],
+    transition: {
+      duration: 0.2, // CZAS TRWANIA: 0.6s
+      ease: "easeOut",
+    },
   },
 };
 
-// --- 2. Update Component Props and State ---
+// --- Komponent Kafelka ---
 
+const ServiceTile: React.FC<ServiceTileProps> = ({
+  icon: Icon,
+  title,
+  description,
+}) => {
+  return (
+    <motion.div
+      variants={tileVariants}
+      className="flex flex-col items-center hover:scale-105 p-6 bg-white/5 backdrop-blur-sm border border-gray-500 rounded-xl shadow-lg hover:bg-white/10 transition duration-300 min-h-[250px] w-full"
+    >
+      <div className="text-4xl text-cyan-400 mb-4">
+        <Icon />
+      </div>
+      <h3 className="text-xl font-semibold text-white mb-3 text-center">
+        {title}
+      </h3>
+      <p className="text-gray-300 text-center text-sm">{description}</p>
+    </motion.div>
+  );
+};
+
+// --- Komponent About ---
 interface AboutProps {
-  mainControls: AnimationControls;
+  // mainControls nie jest już potrzebne jako prop
 }
 
-export const About = forwardRef(
-  (props: AboutProps, ref: ForwardedRef<HTMLElement>) => {
-    const { mainControls } = props;
+export const About: React.FC<AboutProps> = () => {
+  const sectionControls = useAnimationControls(); // Używamy własnych kontrolerów
 
-    // State to track the currently selected service, initialized to 'wordpress'
-    const [currentService, setCurrentService] =
-      useState<ServiceKey>("wordpress");
+  const sectionVariants: Variants = {
+    hidden: { scaleY: 0, scaleX: 0, opacity: 1, y: 0 },
+    visible: { scaleY: 1, scaleX: 1, opacity: 1, y: 0 },
+  };
 
-    // Click handler function
-    const handleServiceChange = (key: ServiceKey) => {
-      setCurrentService(key);
-    };
+  const ref = useRef(null);
+  const isInView = useInView(ref); // Dodaj { once: true } aby animacja uruchomiła się tylko raz
 
-    // Get the current service object for displaying content
-    const serviceContent = services[currentService].content;
+  // Użycie isInView
+  useEffect(() => {
+    if (isInView) {
+      sectionControls.start("visible");
+    }
+  }, [isInView, sectionControls]);
 
-    // --- 3. Component JSX with Picker Logic ---
-
-    return (
-      <motion.section
-        ref={ref}
-        variants={{
-          hidden: { scaleY: 0.2, scaleX: 0, opacity: 0.2, y: 400 },
-          visible: { scaleY: 1, scaleX: 1, opacity: 1, y: 0 },
-        }}
-        initial="hidden"
-        animate={mainControls}
-        transition={{
-          duration: 0.3,
-          delay: 0,
-        }}
-        className="text-2xl w-full border-white rounded-2xl border-[6px] my-8 max-w-6xl bg-slate-800"
-      >
-        {/* Header/Title Bar (Unchanged) */}
-        <div className="font-mono w-full border-b-[6px] border-white p-4 flex justify-between">
-          C:\win32\Cennik
-          <div className="flex justify-end gap-2">
-            <div className="border-b-4 border-white w-6 mb-2.5"></div>
-
-            <PiSubtractSquareDuotone />
-            <IoClose />
-          </div>
-        </div>
-
-        {/* Main Content Area */}
-        <div className="grid grid-cols-3 h-[64vh]">
-          {/* Service Picker/List (Left Side) */}
-          <div className="border-r-[6px] border-white p-2 ">
-            <ul className="flex flex-col gap-1 ">
-              {(Object.keys(services) as ServiceKey[]).map((key) => {
-                const service = services[key];
-                const Icon = service.icon; // Get the component for the icon
-
-                const isSelected = key === currentService;
-
-                return (
-                  <li
-                    key={key}
-                    // Apply different styling if selected, and add hover effect
-                    className={`flex 
-                      items-center gap-2 p-1 cursor-pointer transition-colors duration-200 ${
-                        isSelected
-                          ? "bg-white text-slate-800 font-bold border-slate-800 rounded-lg"
-                          : "hover:bg-slate-700 rounded-lg"
-                      }`}
-                    // Set the click handler
-                    onClick={() => handleServiceChange(key)}
-                  >
-                    <Icon className="text-3xl" /> {service.name}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Service Content Display (Right Side) */}
-          <div className="flex-grow text-xl">{serviceContent}</div>
-        </div>
-      </motion.section>
-    );
-  }
-);
-
-About.displayName = "About";
+  return (
+    <motion.section
+      ref={ref}
+      variants={sectionVariants}
+      initial="hidden" // Stan początkowy
+      animate={sectionControls} // Teraz kontrolujemy animację lokalnie
+      transition={{
+        duration: 0.5,
+        delay: 0,
+      }}
+      exit="exit"
+    >
+      <div className="max-w-6xl w-full">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={sectionControls} // Kontrola także elementów wewnętrznych
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {serviceData.map((service, index) => (
+            <ServiceTile
+              key={service.title}
+              icon={service.icon}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};

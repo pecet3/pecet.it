@@ -6,12 +6,13 @@ import { MdOutlineEmail } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { About } from "@/components/About";
+import { Pricing } from "@/components/Pricing";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
 import { Mailer } from "@/components/Mailme";
 import { OurStack } from "@/components/OurStack";
 import { RotatingCube } from "@/components/Cube";
 import { SceneContainer } from "@/components/Macbook";
+import { About } from "@/components/About";
 
 export default function Home() {
   const ref = useRef(null);
@@ -78,7 +79,8 @@ export default function Home() {
       <WelcomeSection setIsOpen={setIsMailOpen} isMobile={isMobile} />
 
       <div className="flex flex-col items-center gap-48 max-w-7xl">
-        <About ref={ref} mainControls={mainControls} />
+        <About />
+        <Pricing />
         <div className="h-screen"></div>
       </div>
 
