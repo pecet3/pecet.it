@@ -3,11 +3,20 @@
 import { useState } from "react";
 import { BiMailSend } from "react-icons/bi";
 
+import { motion, AnimatePresence } from "framer-motion"; // <-- Import AnimatePresence
+import { MdOutlineEmail } from "react-icons/md";
+
 const mailContent = {
   content: "Dzień dobry, \n\n",
 };
 
-export const Mailme = () => {
+export const Mailer = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<boolean>;
+}) => {
   const [input, setInput] = useState(mailContent.content);
   const [email, setEmail] = useState("");
   const [isWritting, setIsWritting] = useState(false);
@@ -40,117 +49,129 @@ export const Mailme = () => {
     }
   };
 
+  const initialAnimation = { scale: 0.3, top: 12, y: 160, x: 160, opacity: 1 };
+  const animateAnimation = { scale: 1, left: 21, y: 0, x: 0, opacity: 1 };
+  const transitionSettings = { ease: "easeOut", duration: 0.2, delay: 0 };
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="rounded-2xl bg-slate-600 p-4 border-[5px] border-white
-             flex flex-col m-auto justify-end gap-4 w-full relative max-w-6xl"
-    >
-      <div className="flex justify-end gap-2">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="rounded-lg p-2 border-[5px] border-white
-                w-64 bg-slate-800"
-          placeholder="Podaj swój email"
-          required
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="self-end btn-secondary font-sans m-auto bg flex items-center gap-2 px-3 py-2 rounded-lg"
+    <div className=" bottom-4 right-4 fixed">
+      {/* 1. Owiń animowaną zawartość w AnimatePresence.
+        2. Ustaw onExitComplete na funkcję, jeśli potrzebujesz jakiegoś działania po zakończeniu animacji zamykania.
+      */}
+      {isOpen ? (
+        <motion.div
+          key="mail-form"
+          initial={initialAnimation}
+          animate={animateAnimation}
+          // Ustaw exit na te same wartości co initial, aby animacja zamknięcia była taka sama jak animacja otwarcia (odwrotna)
+          exit={initialAnimation}
+          transition={transitionSettings}
         >
-          {loading ? "Wysyłanie..." : "Wyślij"}
-          <BiMailSend size={24} />
-        </button>
-      </div>
-
-      <textarea
-        rows={16}
-        className="rounded-lg p-2 border-[5px] border-white resize-none bg-slate-800"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onClick={() => {
-          if (!isWritting) {
-            setInput(mailContent.content);
-            setIsWritting(true);
-          }
-        }}
-        required
-      />
-
-      {/* <div className="absolute top-24 left-8 text-white">
-        {!isWritting && input === "" ? (
-          <TypewriterComponent
-            options={{
-              strings: mailContent.content,
-              autoStart: true,
-              delay: 20,
-            }}asf
-          />
-        ) : null}
-      </div> */}
-
-      {status && (
-        <p
-          className={`text-center font-bold mt-2 ${
-            status === 200
-              ? "text-green-400"
-              : status === 400
-              ? "text-yellow-400"
-              : "text-red-500"
-          }`}
+          <form
+            onSubmit={handleSubmit}
+            className="flex w-[56vh] flex-col gap-2 bg-white/10 rounded-lg backdrop-blur-sm
+ bg- px-2 pb-2 border-2 items-start relative shadow-lg shadow-gray-800"
+          >
+            <div className="flex items-end pt-3 m-0 gap-1">
+              {" "}
+              <button
+                className="w-4 h-4 bg-red-500 rounded-full "
+                onClick={() => setIsOpen(false)}
+                type="button" // Dodaj type="button", aby nie wysyłał formularza
+              ></button>
+              <button
+                className="w-4 h-4 bg-yellow-500 rounded-full"
+                type="button" // Dodaj type="button"
+              ></button>
+              <button
+                className="w-4 h-4 bg-green-500 rounded-full"
+                type="button" // Dodaj type="button"
+              ></button>
+            </div>
+            <div className="flex  justify-between m-auto w-full gap-2">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="rounded-lg p-2 border-1 border-gray-400  w-full
+                bg-slate-800"
+                placeholder="Podaj swój email"
+                required
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="self-end 
+           bg-white text-black duration-300 hover:cursor-pointer
+        font-sans m-0 bg flex items-center gap-2 px-3 py-2 rounded-lg"
+              >
+                <BiMailSend size={24} />
+              </button>
+            </div>
+            <textarea
+              rows={16}
+              className="rounded-lg w-full p-2 border-1 border-gray-400 resize-none bg-slate-800"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onClick={() => {
+                if (!isWritting) {
+                  setInput(mailContent.content);
+                  setIsWritting(true);
+                }
+              }}
+              required
+            />
+            {status && (
+              <p
+                className={`text-center font-bold mt-2 ${
+                  status === 200
+                    ? "text-green-400"
+                    : status === 400
+                    ? "text-yellow-400"
+                    : "text-red-500"
+                }`}
+              >
+                {status === 200 && "Wiadomość wysłana ✅"}
+                {status === 400 && "Brak wymaganych danych ⚠️"}
+                {status === 500 && "Błąd serwera ❌"}
+              </p>
+            )}
+          </form>
+        </motion.div>
+      ) : (
+        <motion.button
+          animate={{
+            scale: [0.9, 1.2, 1],
+          }}
+          transition={{
+            duration: 1,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "mirror",
+            delay: 1,
+          }}
+          onClick={() => setIsOpen(true)}
+          className=" font-bold text-xl
+      duration-1000 flex items-center justify-center hover:cursor-pointer
+      backdrop-blur-lg bg-white text-black p-2   rounded-xl hover:scale-105
+       hover:shadow-lg shadow-md shadow-gray-900"
         >
-          {status === 200 && "Wiadomość wysłana ✅"}
-          {status === 400 && "Brak wymaganych danych ⚠️"}
-          {status === 500 && "Błąd serwera ❌"}
-        </p>
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1],
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeInOut",
+              repeat: Infinity,
+              repeatType: "mirror",
+            }}
+            className=" flex items-center flex-col"
+          >
+            <MdOutlineEmail size={48} />
+          </motion.div>
+        </motion.button>
       )}
-    </form>
-  );
-};
-
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { motion } from "framer-motion";
-import { IoClose } from "react-icons/io5";
-
-export const MailmeOverlay = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [isMailme, setIsMailme] = useState(false);
-
-  useEffect(() => {
-    setIsMailme(searchParams.get("mailme") === "true");
-  }, [searchParams]);
-
-  const closeMailme = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete("mailme");
-    router.replace(`?${params.toString()}`, { scroll: false });
-  };
-
-  if (!isMailme) return null;
-
-  return (
-    <motion.section
-      initial={{ y: -400 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.4 }}
-      className="bg-black w-full fixed top-0 right-0 bg-opacity-80 h-full backdrop-blur-sm
-        z-50 flex flex-col justify-center items-center font-mono px-8 lg:px-24 xl:px-64"
-    >
-      <Mailme />
-      <motion.button
-        initial={{ x: 0, opacity: 0, rotate: 0 }}
-        animate={{ x: 0, opacity: 1, rotate: 180 }}
-        transition={{ ease: "easeOut", duration: 0.3, delay: 0.4 }}
-        className="fixed z-50 top-4 right-4"
-        onClick={closeMailme}
-      >
-        <IoClose size={32} />
-      </motion.button>
-    </motion.section>
+    </div>
   );
 };

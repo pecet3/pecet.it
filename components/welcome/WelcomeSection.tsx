@@ -7,16 +7,16 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 interface WelcomeSectionProps {
   isMobile: boolean;
+  setIsOpen: React.Dispatch<boolean>;
 }
 
-export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ isMobile }) => {
+export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
+  isMobile,
+  setIsOpen,
+}) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const openMailme = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("mailme", "true");
-    router.replace(`?${params.toString()}`, { scroll: false });
-  };
+
   return (
     <section className="flex md:flex-row flex-col gap-16 items-center h-screen">
       {isMobile ? (
@@ -37,7 +37,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ isMobile }) => {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 4.5, ease: "easeOut" }}
-              onClick={() => openMailme()}
+              onClick={() => setIsOpen(true)}
               className="btn hover:scale-105 duration-300 hover:shadow-lg shadow-md shadow-gray-900"
             >
               <motion.div
@@ -74,11 +74,12 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ isMobile }) => {
               <h2 className="text-5xl font-thin text-center">Zostaw to nam!</h2>
             </div>
             <motion.button
-              onClick={() => openMailme()}
+              onClick={() => setIsOpen(true)}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 5 }}
-              className="btn hover:scale-105 duration-300 hover:shadow-lg shadow-md shadow-gray-900"
+              className="btn bg-white text-black hover:scale-105 duration-300 hover:shadow-lg
+               shadow-md shadow-gray-900"
             >
               <MdOutlineEmail size={30} />
               Napisz maila

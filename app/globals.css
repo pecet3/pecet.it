@@ -21,7 +21,7 @@ body {
 
 
 .btn {
-    @apply px-3 py-2 rounded-xl font-bold text-xl hover:cursor-pointer hover:bg-fuchsia-500 bg-fuchsia-600 duration-300 gap-1 flex items-center justify-center
+    @apply px-3 py-2 rounded-xl font-bold text-xl hover:cursor-pointer duration-300 gap-1 flex items-center justify-center
   }
 .btn-secondary {
   @apply px-3 py-2 rounded-xl font-bold text-xl hover:bg-sky-400 duration-300 gap-1 bg-sky-500 flex items-center justify-center

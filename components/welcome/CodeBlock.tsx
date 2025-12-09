@@ -1,58 +1,53 @@
 "use client";
 import Typewriter from "typewriter-effect";
+import { AppleWindow } from "../AppleWindow";
 
 export const CodeBlock = () => {
   const rangeArray = Array.from({ length: 15 }, (_, index) => index + 1);
 
   return (
-    <div
-      className="font-mono text-sm md:text-base  w-96 md:w-[30rem] 
-        bg-slate-700 px-2 py-2 rounded-lg  border-t-[20px] border-4 border-slate-200 
-        shadow-lg shadow-black z-0
-        grid grid-cols-[32px_minmax(0px,_1fr)] gap-0 relative"
-    >
-      <div className="absolute flex gap-1 -top-4">
-        <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-        <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-        <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-      </div>
-      <div className="flex flex-col w-4 text-sky-400">
-        {rangeArray.map((v) => (
-          <p key={v}>{v}.</p>
-        ))}
-      </div>
-      <div>
-        <HTMLelement element="html" lang="pl">
-          <HTMLelement element="head">
-            <p className="text-fuchsia-400">
-              &lt;meta
-              <b className="text-teal-400">
-                {" "}
-                charset
-                <b className="text-amber-400">=</b>
-                <b className="text-red-400">&quot;utf-8&quot;</b>
-              </b>
-              &gt;
+    <AppleWindow>
+      <div className="flex gap-2 w-[64vh]">
+        <div className="flex flex-col w-4 text-sky-400 text-xl text-right">
+          {rangeArray.map((v) => (
+            <p className="text-right w-full" key={v}>
+              {v}.
             </p>
-            <HTMLelement element="title">Twoja wymarzona strona</HTMLelement>
-          </HTMLelement>
-          <HTMLelement element="body">
-            <HTMLelement element="div" classes="container">
-              <Typewriter
-                options={{
-                  strings: `
+          ))}
+        </div>
+        <div className="text-xl ml-4">
+          <HTMLelement element="html" lang="pl">
+            <HTMLelement element="head">
+              <p className="text-fuchsia-400">
+                &lt;meta
+                <b className="text-teal-400">
+                  {" "}
+                  charset
+                  <b className="text-amber-400">=</b>
+                  <b className="text-red-400">&quot;utf-8&quot;</b>
+                </b>
+                &gt;
+              </p>
+              <HTMLelement element="title">Twoja wymarzona strona</HTMLelement>
+            </HTMLelement>
+            <HTMLelement element="body">
+              <HTMLelement element="div" classes="container">
+                <Typewriter
+                  options={{
+                    strings: `
                      Hej, jesteśmy pecet.it!<br>
                     chętnie wykonamy dla Ciebie <br>
                     piękną stronę internetową!`,
-                  autoStart: true,
-                  delay: 20,
-                }}
-              />
+                    autoStart: true,
+                    delay: 0,
+                  }}
+                />
+              </HTMLelement>
             </HTMLelement>
           </HTMLelement>
-        </HTMLelement>
+        </div>
       </div>
-    </div>
+    </AppleWindow>
   );
 };
 
@@ -61,17 +56,19 @@ interface HTMLelementProps {
   classes?: string;
   lang?: string;
   children?: React.ReactNode;
+  color?: string;
 }
 
 const HTMLelement: React.FC<HTMLelementProps> = ({
   element,
   classes,
   lang,
+  color = "fuchsia-400",
   children,
 }) => {
   return (
     <div>
-      <p className="text-fuchsia-400">
+      <p className={`text-${color}`}>
         &lt;{element}
         {classes ? (
           <b className="text-teal-400">
@@ -92,7 +89,7 @@ const HTMLelement: React.FC<HTMLelementProps> = ({
         &gt;
       </p>
       <div className="pl-6 text-white font-extrabold"> {children}</div>
-      <p className="text-fuchsia-400">&lt;/{element}&gt;</p>
+      <p className={`text-${color}`}>&lt;/{element}&gt;</p>
     </div>
   );
 };
