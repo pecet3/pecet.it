@@ -2,6 +2,7 @@
 // import { useEffect, useRef, useState } from "react";
 import { Logo } from "../Logo";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { FaFacebook } from "react-icons/fa";
 
 export const Navigation = () => {
@@ -32,7 +33,7 @@ export const Navigation = () => {
             animate-fade-in fixed w-full py-3 lg:px-16 px-2 duration-500 z-40 backdrop-blur-sm"
       >
         <Logo />
-        <div className="font-mono text-xl">O Mnie // Oferta // Blog</div>
+        <div className="font-mono text-xl"></div>
       </motion.nav>
     </>
   );

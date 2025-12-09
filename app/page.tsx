@@ -12,7 +12,7 @@ import { Mailer } from "@/components/Mailme";
 import { OurStack } from "@/components/OurStack";
 import { RotatingCube } from "@/components/Cube";
 import { SceneContainer } from "@/components/Macbook";
-import { About } from "@/components/About";
+import { About, About2 } from "@/components/About";
 
 export default function Home() {
   const ref = useRef(null);
@@ -80,6 +80,7 @@ export default function Home() {
 
       <div className="flex flex-col items-center gap-48 max-w-7xl">
         <About />
+        <About2 />
         <Pricing />
         <div className="h-screen"></div>
       </div>

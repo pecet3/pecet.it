@@ -135,55 +135,76 @@ export const Pricing: React.FC<PricingProps> = ({}) => {
       }}
       exit="exit"
       initial="hidden"
-      className="text-2xl w-full border-white rounded-2xl border my-8 max-w-6xl shadow-lg
+      className="flex flex-col"
+    >
+      <motion.div
+        initial={{ scaleY: 0, scaleX: 0, opacity: 1, y: -500 }}
+        animate={{ scaleY: 1, scaleX: 1, opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.4,
+          delay: 0,
+        }}
+        className="text-5xl max-w-4xl m-auto my-4 text-center font-thin tracking-widest"
+      >
+        Szczegóły naszej oferty
+      </motion.div>
+      <motion.div
+        initial={{ scaleY: 0, scaleX: 0, opacity: 1, y: -500 }}
+        animate={{ scaleY: 1, scaleX: 1, opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.4,
+          delay: 0,
+        }}
+        className="text-2xl w-full border-white rounded-2xl border my-8 max-w-6xl shadow-lg
          shadow-gray-800
          bg-white/5 backdrop-blur-sm"
-    >
-      {/* Header/Title Bar (Unchanged) */}
-      <div className="font-mono w-full border-b border-white p-4 flex justify-between">
-        C:\win32\Cennik
-        <div className="flex justify-end gap-2">
-          <div className="border-b-4 border-white w-4 mb-2.5"></div>
+      >
+        {/* Header/Title Bar (Unchanged) */}
+        <div className="font-mono w-full border-b border-white p-4 flex justify-between">
+          C:\win32\offer
+          <div className="flex justify-end gap-2">
+            <div className="border-b-4 border-white w-4 mb-2.5"></div>
 
-          <PiSubtractSquareDuotone />
-          <IoClose size={28} />
+            <PiSubtractSquareDuotone />
+            <IoClose size={28} />
+          </div>
         </div>
-      </div>
 
-      {/* Main Content Area */}
-      <div className="grid grid-cols-3 h-[64vh]">
-        {/* Service Picker/List (Left Side) */}
-        <div className="border-r border-white p-2 ">
-          <ul className="flex flex-col gap-1 ">
-            {(Object.keys(services) as ServiceKey[]).map((key) => {
-              const service = services[key];
-              const Icon = service.icon; // Get the component for the icon
+        {/* Main Content Area */}
+        <div className="grid grid-cols-3 h-[64vh]">
+          {/* Service Picker/List (Left Side) */}
+          <div className="border-r border-white p-2 ">
+            <ul className="flex flex-col gap-1 ">
+              {(Object.keys(services) as ServiceKey[]).map((key) => {
+                const service = services[key];
+                const Icon = service.icon; // Get the component for the icon
 
-              const isSelected = key === currentService;
+                const isSelected = key === currentService;
 
-              return (
-                <li
-                  key={key}
-                  // Apply different styling if selected, and add hover effect
-                  className={`flex 
+                return (
+                  <li
+                    key={key}
+                    // Apply different styling if selected, and add hover effect
+                    className={`flex 
                       items-center gap-2 p-1 cursor-pointer transition-colors duration-200 ${
                         isSelected
                           ? "bg-white text-slate-800 font-bold border-slate-800 rounded-lg"
                           : " rounded-lg"
                       }`}
-                  // Set the click handler
-                  onClick={() => handleServiceChange(key)}
-                >
-                  <Icon className="text-3xl" /> {service.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+                    // Set the click handler
+                    onClick={() => handleServiceChange(key)}
+                  >
+                    <Icon className="text-3xl" /> {service.name}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
-        {/* Service Content Display (Right Side) */}
-        <div className="flex-grow text-xl">{serviceContent}</div>
-      </div>
+          {/* Service Content Display (Right Side) */}
+          <div className="flex-grow text-xl">{serviceContent}</div>
+        </div>
+      </motion.div>
     </motion.section>
   );
 };
