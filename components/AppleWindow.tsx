@@ -8,8 +8,8 @@ export const AppleWindow = ({
   return (
     <div
       className="font-mono text-sm md:text-base  w-full
-        bg-slate-700 px-2 py-2 rounded-lg  border-t-[26px] border-4 border-slate-100 
-        shadow-lg shadow-black z-0 
+         rounded-lg  border-t-[26px] border-4 border-slate-100 
+        shadow-2xl shadow-gray-900 z-0 p-0.5 bg-slate-100
         flex gap-0 relative"
     >
       <div className="absolute flex gap-2 -top-5">
@@ -22,8 +22,7 @@ export const AppleWindow = ({
       </div>
       <div
         className="font-mono text-sm md:text-base  w-full
-        bg-slate-700 
-       
+        bg-slate-900  rounded-md p-1.5
         flex "
       >
         {children}

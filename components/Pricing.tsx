@@ -202,7 +202,7 @@ export const Pricing: React.FC<PricingProps> = ({}) => {
           </div>
 
           {/* Service Content Display (Right Side) */}
-          <div className="flex-grow text-xl">{serviceContent}</div>
+          <div className="text-xl">{serviceContent}</div>
         </div>
       </motion.div>
     </motion.section>

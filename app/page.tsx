@@ -8,11 +8,17 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Pricing } from "@/components/Pricing";
 import { WelcomeSection } from "@/components/welcome/WelcomeSection";
-import { Mailer } from "@/components/Mailme";
+import { Mailer, MailerButton } from "@/components/Mailme";
 import { OurStack } from "@/components/OurStack";
 import { RotatingCube } from "@/components/Cube";
 import { SceneContainer } from "@/components/Macbook";
 import { About, About2 } from "@/components/About";
+import Image from "next/image";
+import {
+  Terminal,
+  HostingDescription,
+  MainDescription,
+} from "@/components/Description";
 
 export default function Home() {
   const ref = useRef(null);
@@ -78,13 +84,17 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center pt-48 sm:pt-0 px-8 lg:px-24 xl:px-64 pb-16">
       <WelcomeSection setIsOpen={setIsMailOpen} isMobile={isMobile} />
 
-      <div className="flex flex-col items-center gap-48 max-w-7xl">
+      <div className="flex flex-col items-center gap-48 max-w-6xl my-16">
+        <MainDescription />
         <About />
+        <HostingDescription />
+        <Terminal />
         <About2 />
         <Pricing />
-        <div className="h-screen"></div>
       </div>
-
+      {scrollY >= screenSize.height * 0.2 ? (
+        <MailerButton isOpen={isMailOpen} setIsOpen={setIsMailOpen} />
+      ) : null}
       <Mailer isOpen={isMailOpen} setIsOpen={setIsMailOpen} />
     </main>
   );

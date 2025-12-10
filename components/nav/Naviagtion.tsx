@@ -29,7 +29,7 @@ export const Navigation = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ ease: "easeOut", duration: 1, delay: 4.6 }}
         className="flex items-center
-        justify-between  bg-slate-900/80 border-b border-b-gray-400
+        justify-between  bg-slate-900/50 border-b border-b-gray-400
             animate-fade-in fixed w-full py-3 lg:px-16 px-2 duration-500 z-40 backdrop-blur-sm"
       >
         <Logo />

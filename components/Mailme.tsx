@@ -49,130 +49,154 @@ export const Mailer = ({
     }
   };
 
-  const initialAnimation = { scale: 0.3, top: 12, y: 160, x: 160, opacity: 1 };
+  const initialAnimation = { scale: 0.3, top: 12, y: 160, x: 160, opacity: 0 };
   const animateAnimation = { scale: 1, left: 21, y: 0, x: 0, opacity: 1 };
-  const transitionSettings = { ease: "easeOut", duration: 0.2, delay: 0 };
+  const transitionSettings = { ease: "easeOut", duration: 0.2 };
 
   return (
-    <div className=" bottom-4 right-4 fixed">
-      {/* 1. Owiń animowaną zawartość w AnimatePresence.
-        2. Ustaw onExitComplete na funkcję, jeśli potrzebujesz jakiegoś działania po zakończeniu animacji zamykania.
-      */}
-      {isOpen ? (
-        <motion.div
-          key="mail-form"
-          initial={initialAnimation}
-          animate={animateAnimation}
-          // Ustaw exit na te same wartości co initial, aby animacja zamknięcia była taka sama jak animacja otwarcia (odwrotna)
-          exit={initialAnimation}
-          transition={transitionSettings}
-        >
-          <form
-            onSubmit={handleSubmit}
-            className="flex w-[56vh] flex-col gap-2 rounded-lg 0 
- bg- px-2 pb-2 border backdrop-blur-sm bg-white/10 border-gray-400 
- items-start relative shadow-lg shadow-gray-800"
+    <div className="bottom-4 right-4 fixed">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            key="mail-form"
+            initial={initialAnimation}
+            animate={animateAnimation}
+            exit={initialAnimation} // 👈 odwrotna animacja przy zamknięciu
+            transition={transitionSettings}
           >
-            <div className="flex items-end pt-2 m-0 gap-1">
-              {" "}
-              <button
-                className="w-4 h-4 bg-red-500 rounded-full "
-                onClick={() => setIsOpen(false)}
-                type="button" // Dodaj type="button", aby nie wysyłał formularza
-              ></button>
-              <button
-                className="w-4 h-4 bg-yellow-400 rounded-full"
-                type="button" // Dodaj type="button"
-              ></button>
-              <button
-                className="w-4 h-4 bg-green-500 rounded-full"
-                type="button" // Dodaj type="button"
-              ></button>
-            </div>
-            <div className="flex  justify-between m-auto w-full gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="rounded-lg p-2 border-1 border-gray-400  w-full
-                bg-slate-800"
-                placeholder="Podaj swój email"
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-[56vh] flex-col gap-2 rounded-lg bg-white/10 
+              px-2 pb-2 border backdrop-blur-sm border-gray-400 
+              items-start relative shadow-lg shadow-gray-800"
+            >
+              <div className="flex items-end pt-2 m-0 gap-1">
+                <button
+                  className="w-4 h-4 bg-red-500 rounded-full"
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                ></button>
+                <button
+                  className="w-4 h-4 bg-yellow-400 rounded-full"
+                  type="button"
+                ></button>
+                <button
+                  className="w-4 h-4 bg-green-500 rounded-full"
+                  type="button"
+                ></button>
+              </div>
+
+              <div className="flex justify-between m-auto w-full gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-lg p-2 border border-gray-400 w-full bg-slate-800"
+                  placeholder="Podaj swój email"
+                  required
+                />
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="self-end bg-white text-black duration-300 
+                  font-sans m-0 flex items-center gap-2 px-3 py-2 rounded-lg"
+                >
+                  <BiMailSend size={24} />
+                </button>
+              </div>
+
+              <textarea
+                rows={16}
+                className="rounded-lg w-full p-2 border border-gray-400 resize-none bg-slate-800"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onClick={() => {
+                  if (!isWritting) {
+                    setInput(mailContent.content);
+                    setIsWritting(true);
+                  }
+                }}
                 required
               />
-              <button
-                type="submit"
-                disabled={loading}
-                className="self-end 
-           bg-white text-black duration-300 hover:cursor-pointer
-        font-sans m-0 bg flex items-center gap-2 px-3 py-2 rounded-lg"
-              >
-                <BiMailSend size={24} />
-              </button>
-            </div>
-            <textarea
-              rows={16}
-              className="rounded-lg w-full p-2 border-1 border-gray-400 resize-none bg-slate-800"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onClick={() => {
-                if (!isWritting) {
-                  setInput(mailContent.content);
-                  setIsWritting(true);
-                }
-              }}
-              required
-            />
-            {status && (
-              <p
-                className={`text-center font-bold mt-2 ${
-                  status === 200
-                    ? "text-green-400"
-                    : status === 400
-                    ? "text-yellow-400"
-                    : "text-red-500"
-                }`}
-              >
-                {status === 200 && "Wiadomość wysłana ✅"}
-                {status === 400 && "Brak wymaganych danych ⚠️"}
-                {status === 500 && "Błąd serwera ❌"}
-              </p>
-            )}
-          </form>
-        </motion.div>
-      ) : (
-        <motion.button
-          animate={{
-            scale: [0.9, 1.2, 1],
-          }}
-          transition={{
-            duration: 1,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "mirror",
-            delay: 1,
-          }}
-          onClick={() => setIsOpen(true)}
-          className=" font-bold text-xl
-      duration-1000 flex items-center justify-center hover:cursor-pointer
-      backdrop-blur-lg bg-white/10  text-white border border-gray-400 p-2   rounded-xl hover:scale-105
-       hover:shadow-lg shadow-md shadow-gray-900"
-        >
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1],
-            }}
-            transition={{
-              duration: 1,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "mirror",
-            }}
-            className=" flex items-center flex-col"
-          >
-            <MdOutlineEmail size={48} />
+
+              {status && (
+                <p
+                  className={`text-center font-bold mt-2 ${
+                    status === 200
+                      ? "text-green-400"
+                      : status === 400
+                      ? "text-yellow-400"
+                      : "text-red-500"
+                  }`}
+                >
+                  {status === 200 && "Wiadomość wysłana ✅"}
+                  {status === 400 && "Brak wymaganych danych ⚠️"}
+                  {status === 500 && "Błąd serwera ❌"}
+                </p>
+              )}
+            </form>
           </motion.div>
-        </motion.button>
-      )}
+        )}
+      </AnimatePresence>
     </div>
+  );
+};
+export const MailerButton = ({
+  isOpen,
+  setIsOpen,
+}: {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<boolean>;
+}) => {
+  if (isOpen) return;
+  return (
+    <motion.button
+      whileHover={{
+        scale: 1.2, // zatrzymuje pulsowanie
+        transition: { duration: 0 }, // natychmiastowa zmiana → brak animacji
+      }}
+      initial={{
+        scale: 0,
+      }}
+      animate={{
+        scale: [0.9, 1.2, 1],
+      }}
+      transition={{
+        duration: 1,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatType: "mirror",
+        delay: 1,
+      }}
+      onClick={() => setIsOpen(true)}
+      className="
+       bottom-4 right-4 fixed
+      font-bold text-xl
+      duration-300 flex items-center justify-center hover:cursor-pointer
+  ring-cyan-400 rounded-xl  text-white border border-gray-500 p-2 
+           bg-white/5 hover:bg-cyan-400/5 backdrop-blur-sm 
+            hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
+"
+    >
+      <motion.div
+        whileHover={{
+          scale: 1.2, // zatrzymuje pulsowanie
+          transition: { duration: 0 }, // natychmiastowa zmiana → brak animacji
+        }}
+        animate={{
+          scale: [1.2, 1, 1],
+        }}
+        transition={{
+          duration: 1,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "mirror",
+        }}
+        className=" flex items-center flex-col"
+      >
+        <MdOutlineEmail size={48} />
+      </motion.div>
+    </motion.button>
   );
 };

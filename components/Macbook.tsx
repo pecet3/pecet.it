@@ -61,12 +61,11 @@ export const SceneContainer: React.FC<SceneContainerProps> = ({
     // Style ustawiają płótno na pełną szerokość i wysokość.
     <div style={{ width: "100%", height: "500px" }}>
       <Canvas
-        dpr={[1, 2]}
         camera={{ position: [5, 5, 5], fov: 75 }} // Ustawienie początkowej kamery
       >
         {/* Oświetlenie ambientowe i kierunkowe dla lepszej widoczności */}
         <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <directionalLight position={[5, 5, 5]} intensity={1} />
 
         {/* Dodaje tło i globalne oświetlenie (można usunąć, jeśli wolisz własne) */}
         <Environment preset="city" />
