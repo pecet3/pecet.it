@@ -66,7 +66,7 @@ export const MainDescription = () => {
         src="/cpu.png"
         alt="CPU Icon"
         className="w-96 h-auto"
-        initial={{ clipPath: "inset(100 0 0% 0)" }}
+        initial={{ clipPath: "inset(100% 0 0% 0)" }}
         whileInView={{
           clipPath: "inset(0% 0 0% 0)",
           transition: { duration: 0.6, ease: "easeOut" },
