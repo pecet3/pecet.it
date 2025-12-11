@@ -66,7 +66,7 @@ export const Mailer = ({
           >
             <form
               onSubmit={handleSubmit}
-              className="flex w-[56vh] flex-col gap-2 rounded-lg bg-white/10 
+              className="flex w-[56vh] flex-col gap-2 rounded-lg bg-white/15 
               px-2 pb-2 border backdrop-blur-sm border-gray-400 
               items-start relative shadow-lg shadow-gray-800"
             >

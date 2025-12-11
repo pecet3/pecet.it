@@ -168,7 +168,7 @@ export const Tiles: React.FC<AboutProps> = ({
     hidden: {},
   };
   const ref = useRef(null);
-  const isInView = useInView(ref);
+  const isInView = useInView(ref, { margin: "0px 100px -50px 0px" });
   const ref2 = useRef(null);
   const isInView2 = useInView(ref2);
 

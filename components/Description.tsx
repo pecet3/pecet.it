@@ -36,7 +36,7 @@ export const MainDescription = () => {
     },
   };
   const t1Variants = {
-    hidden: { opacity: 0, y: -100, x: 0 },
+    hidden: { opacity: 0, y: 0, x: 100 },
     visible: {
       opacity: 1,
       y: 0,
@@ -45,19 +45,20 @@ export const MainDescription = () => {
     },
   };
   const t2Variants = {
-    hidden: { opacity: 0, y: 40, x: 0 },
+    hidden: { opacity: 0, y: 0, x: -100 },
     visible: {
       opacity: 1,
       y: 0,
       x: 0,
-      transition: { duration: 0.2, delay: 0.7 },
+      transition: { duration: 0.3, delay: 0.7 },
     },
   };
 
   return (
     <motion.div
       ref={ref}
-      className="text-3xl max-w-7xl m-auto text-center font-thin tracking-wide flex gap-16 items-center"
+      className="text-3xl max-w-7xl m-auto text-center
+      font-thin tracking-wide flex gap-16 items-center"
       variants={containerVariants}
       initial="hidden"
       animate={controls}
@@ -69,11 +70,11 @@ export const MainDescription = () => {
         initial={{ clipPath: "inset(100% 0 0% 0)" }}
         whileInView={{
           clipPath: "inset(0% 0 0% 0)",
-          transition: { duration: 0.6, ease: "easeOut" },
+          transition: { duration: 0.4, ease: "easeOut" },
         }}
       />
       <motion.div
-        className="text-3xl m-auto
+        className="text-3xl m-auto 
        text-center font-extralight tracking-wider flex flex-col gap-8 items-center"
       >
         <motion.div
@@ -92,14 +93,12 @@ export const MainDescription = () => {
           <br />
         </motion.div>
         <motion.div variants={t2Variants}>
-          <span className="underline decoration-1 decoration-wavy decoration-cyan-400 font-bold">
-            Naszą misją jest{" "}
-          </span>
+          <span className=" font-bold">Naszą misją jest </span>
           dostarczać małym i średnim firmom{" "}
           <span className=" font-bold">rozwiązania IT</span>, które są
-          <span className="italic ">
+          <span className="italic underline decoration-1 decoration-wavy decoration-cyan-400">
             {" "}
-            niezbędne dla we współczesnym świecie.
+            niezbędne we współczesnym świecie.
           </span>
         </motion.div>
       </motion.div>
@@ -314,19 +313,19 @@ export const Terminal2 = () => {
       <AppleWindow>
         <div className="flex text-xl text-left flex-col w-[72vh] justify-between m-0 h-[48vh]">
           <div className="flex flex-col gap-8 p-2">
-            <motion.div className="">
+            <motion.div className="text-emerald-300">
               Oferujemy również pełny{" "}
               <span className="font-bold">hosting i opiekę techniczną</span> nad
               wszystkimi tworzonymi przez nas systemami — aktualizacje, zmiany,
               optymalizacje i ciągłe monitorowanie działania.
             </motion.div>
-            <motion.div>
+            <motion.div className="text-cyan-400">
               Stawiamy na{" "}
               <span className="font-bold">przejrzystość i niezależność</span> —
               w każdej chwili możesz pobrać wszystkie swoje pliki, dane i
               projekty, bez żadnych ukrytych ograniczeń.
             </motion.div>
-            <motion.div>
+            <motion.div className="text-yellow-300">
               Prowadzimy również hosting dla{" "}
               <span className="font-bold">zewnętrznych projektów</span> – jeśli
               masz już gotowe rozwiązanie, możemy zająć się jego utrzymaniem i
@@ -341,10 +340,11 @@ export const Terminal2 = () => {
 
             <TypewriterComponent
               options={{
-                strings: ["ls", "cat ./we_love_linux.txt", ""],
+                strings: ["kochamy linuxa", "", "kochamy projekty open source"],
                 autoStart: true,
                 delay: 0,
                 deleteSpeed: 0,
+                loop: true,
               }}
             />
           </motion.div>

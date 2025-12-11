@@ -29,10 +29,12 @@ export const Navigation = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ ease: "easeOut", duration: 1, delay: 2.8 }}
         className="flex items-center
-        justify-between  bg-slate-900/50 border-b border-b-gray-400
+        justify-between  bg-slate-900/70 border-b border-b-gray-400
             animate-fade-in fixed w-full py-3 lg:px-16 px-2 duration-500 z-40 backdrop-blur-sm"
       >
-        <Logo />
+        <Link href="/" className="tracking-wider">
+          <Logo />
+        </Link>
         <div className="font-mono text-xl">
           <ul className="flex gap-4">
             <li className="font-bold tracking-tighter flex gap-3">

@@ -86,11 +86,14 @@ export default function Home() {
 
       <div className="flex flex-col items-center gap-64 max-w-6xl my-16">
         <MainDescription />
-        <div className="flex flex-col gap-48">
+        <div className="flex flex-col gap-32">
           <Tiles
             tiles={serviceData.slice(3, 6)}
             header={
-              <div className="tracking-wide underline decoration-cyan-400 decoration-wavy decoration">
+              <div
+                className="tracking-wide underline decoration-cyan-400 
+              decoration-wavy decoration-2"
+              >
                 Pokaż się z jak <i className="">najlepszej</i> strony
               </div>
             }
@@ -98,7 +101,10 @@ export default function Home() {
           <Tiles
             tiles={serviceData.slice(0, 3)}
             header={
-              <div className="tracking-wide underline decoration-cyan-400 decoration-wavy decoration">
+              <div
+                className="tracking-wide underline decoration-cyan-400 
+              decoration-wavy decoration-2"
+              >
                 Usprawnij swoją <i>cudowną</i> firmę
               </div>
             }
