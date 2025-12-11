@@ -66,9 +66,9 @@ export const MainDescription = () => {
         src="/cpu.png"
         alt="CPU Icon"
         className="w-96 h-auto"
-        initial={{ clipPath: "inset(0 0 100% 0)" }}
+        initial={{ clipPath: "inset(100 0 0% 0)" }}
         whileInView={{
-          clipPath: "inset(0 0 0% 0)",
+          clipPath: "inset(0% 0 0% 0)",
           transition: { duration: 0.6, ease: "easeOut" },
         }}
       />
@@ -92,13 +92,15 @@ export const MainDescription = () => {
           <br />
         </motion.div>
         <motion.div variants={t2Variants}>
-          <span className="font-bold">Naszą misją jest </span>
-          dostarczać małym i średnim firmom{" "}
-          <span className="underline decoration-cyan-400 font-bold">
-            rozwiązania IT
+          <span className="underline decoration-1 decoration-wavy decoration-cyan-400 font-bold">
+            Naszą misją jest{" "}
           </span>
-          , które są
-          <span className="italic "> niezbędne dla nowoczesnych frim</span>
+          dostarczać małym i średnim firmom{" "}
+          <span className=" font-bold">rozwiązania IT</span>, które są
+          <span className="italic ">
+            {" "}
+            niezbędne dla we współczesnym świecie.
+          </span>
         </motion.div>
       </motion.div>
     </motion.div>
@@ -121,15 +123,22 @@ export const HostingDescription = () => {
   const containerVariants = {
     hidden: {
       opacity: 0,
-      y: 0,
+      y: 100,
       transition: {
-        delay: 1,
+        delay: 0,
       },
     },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.3 },
+      z: 0,
+      scaleX: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.3,
+        delay: 0.2,
+      },
     },
   };
   const baseDelay = 0.1;
@@ -167,7 +176,7 @@ export const HostingDescription = () => {
       opacity: 1,
       y: 0,
       x: 0,
-      transition: { duration: 0.3, delay: baseDelay + 0.7 },
+      transition: { duration: 0.3, delay: baseDelay + 0.5 },
     },
   };
   const t3Variants = {
@@ -176,7 +185,7 @@ export const HostingDescription = () => {
       opacity: 1,
       y: 0,
       x: 0,
-      transition: { duration: 0.3, delay: baseDelay + 1 },
+      transition: { duration: 0.3, delay: baseDelay + 0.7 },
     },
   };
 
@@ -193,7 +202,7 @@ export const HostingDescription = () => {
           transition: { duration: 0.6, ease: "easeOut", delay: 0 },
         }}
       >
-        <p> Wszystkim się zajmiemy...</p>
+        <p> Wszystkim u nas masz pod ręką...</p>
       </motion.div>
       <motion.div
         ref={ref}
@@ -203,49 +212,14 @@ export const HostingDescription = () => {
         initial="hidden"
         animate={controls}
       >
-        <motion.img
-          src="/hosting.png"
-          alt="Hosting Icon"
-          className="w-96 h-auto"
-          initial={{ clipPath: "inset(100% 0% 0 0)" }}
-          whileInView={{
-            clipPath: "inset(0% 0% 0 0)",
-            transition: { duration: 0.6, ease: "easeOut", delay: 0.6 },
-          }}
-        />
-        <motion.div
-          className=" m-0
-       text-center font-extralight tracking-wider flex flex-col gap-8 items-center"
-        >
-          <motion.div
-            className=" m-auto text-center font-extralight tracking-wide"
-            variants={t1Variants}
-          >
-            Oferujemy również pełny{" "}
-            <span className="font-bold">hosting i opiekę techniczną</span> nad
-            wszystkimi tworzonymi przez nas systemami — aktualizacje, zmiany,
-            optymalizacje i ciągłe monitorowanie działania.
-          </motion.div>
-          <motion.div variants={t2Variants}>
-            Stawiamy na{" "}
-            <span className="font-bold">przejrzystość i niezależność</span> — w
-            każdej chwili możesz pobrać wszystkie swoje pliki, dane i projekty,
-            bez żadnych ukrytych ograniczeń.
-          </motion.div>
-          <motion.div variants={t3Variants}>
-            Prowadzimy również hosting dla{" "}
-            <span className="font-bold">zewnętrznych projektów</span> – jeśli
-            masz już gotowe rozwiązanie, możemy zająć się jego utrzymaniem i
-            dalszym rozwojem.
-          </motion.div>
-        </motion.div>
+        <Terminal2 />
       </motion.div>
     </section>
   );
 };
 export const Terminal = () => {
   return (
-    <section className="flex flex-col text-4xl scale-75">
+    <section className="flex flex-col text-4xl scale-50">
       <AppleWindow>
         <div className="flex text-2xl flex-col w-[96vh] justify-between m-0 h-[64vh]">
           {/* Listing folderów */}
@@ -316,6 +290,51 @@ export const Terminal = () => {
 
           {/* Output of we_love_linux.txt */}
           <motion.div className="flex items-center gap-2 text-2xl font-mono font-thin">
+            <p className="text-fuchsia-500 font-bold">
+              root@master:/home<b className="text-slate-400">$</b>
+            </p>
+
+            <TypewriterComponent
+              options={{
+                strings: ["ls", "cat ./we_love_linux.txt", ""],
+                autoStart: true,
+                delay: 0,
+                deleteSpeed: 0,
+              }}
+            />
+          </motion.div>
+        </div>
+      </AppleWindow>
+    </section>
+  );
+};
+export const Terminal2 = () => {
+  return (
+    <section className="flex flex-col text-xl text-white">
+      <AppleWindow>
+        <div className="flex text-xl text-left flex-col w-[72vh] justify-between m-0 h-[48vh]">
+          <div className="flex flex-col gap-8 p-2">
+            <motion.div className="">
+              Oferujemy również pełny{" "}
+              <span className="font-bold">hosting i opiekę techniczną</span> nad
+              wszystkimi tworzonymi przez nas systemami — aktualizacje, zmiany,
+              optymalizacje i ciągłe monitorowanie działania.
+            </motion.div>
+            <motion.div>
+              Stawiamy na{" "}
+              <span className="font-bold">przejrzystość i niezależność</span> —
+              w każdej chwili możesz pobrać wszystkie swoje pliki, dane i
+              projekty, bez żadnych ukrytych ograniczeń.
+            </motion.div>
+            <motion.div>
+              Prowadzimy również hosting dla{" "}
+              <span className="font-bold">zewnętrznych projektów</span> – jeśli
+              masz już gotowe rozwiązanie, możemy zająć się jego utrzymaniem i
+              dalszym rozwojem.
+            </motion.div>
+          </div>
+          {/* Output of we_love_linux.txt */}
+          <motion.div className="flex items-center gap-2 text-xl font-mono font-thin">
             <p className="text-fuchsia-500 font-bold">
               root@master:/home<b className="text-slate-400">$</b>
             </p>

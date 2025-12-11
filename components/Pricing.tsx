@@ -120,13 +120,19 @@ export const Pricing: React.FC<PricingProps> = ({}) => {
   }, [isInView, sectionControls]);
 
   const sectionVariants: Variants = {
-    hidden: { scaleY: 0, scaleX: 0, opacity: 1, y: 0 },
-    visible: { scaleY: 1, scaleX: 1, opacity: 1, y: 0 },
+    hidden: { scaleY: 1, scaleX: 1, opacity: 0, y: 70, x: 0, scale: 0 },
+    visible: {
+      scaleY: 1,
+      scaleX: 1,
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: [0, 1.1, 1],
+    },
   };
 
   return (
     <motion.section
-      ref={ref}
       variants={sectionVariants}
       animate={sectionControls} // Teraz kontrolujemy animację lokalnie
       transition={{
@@ -138,8 +144,9 @@ export const Pricing: React.FC<PricingProps> = ({}) => {
       className="flex flex-col"
     >
       <motion.div
-        initial={{ scaleY: 0, scaleX: 0, opacity: 1, y: -500 }}
-        animate={{ scaleY: 1, scaleX: 1, opacity: 1, y: 0 }}
+        ref={ref}
+        initial={{ scaleY: 0, scaleX: 0, opacity: 1, x: 500 }}
+        animate={{ scaleY: 1, scaleX: 1, opacity: 1, x: 0 }}
         transition={{
           duration: 0.4,
           delay: 0,
@@ -149,8 +156,8 @@ export const Pricing: React.FC<PricingProps> = ({}) => {
         Szczegóły naszej oferty
       </motion.div>
       <motion.div
-        initial={{ scaleY: 0, scaleX: 0, opacity: 1, y: -500 }}
-        animate={{ scaleY: 1, scaleX: 1, opacity: 1, y: 0 }}
+        initial={{ scaleY: 1, scaleX: 1, opacity: 0, x: -500 }}
+        animate={{ scaleY: 1, scaleX: 1, opacity: 1, x: 0 }}
         transition={{
           duration: 0.4,
           delay: 0,

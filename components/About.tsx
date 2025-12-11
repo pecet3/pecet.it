@@ -4,6 +4,7 @@ import {
   motion,
   useAnimationControls,
   useInView,
+  Variant,
   Variants,
 } from "framer-motion";
 import React, {
@@ -29,18 +30,24 @@ interface ServiceTileProps {
   icon: IconType;
   title: string;
   description: string;
+  variants: Variants;
 }
+export type TileInfo = {
+  icon: IconType;
+  title: string;
+  description: string;
+};
 
-const serviceData = [
+export const serviceData = [
   {
     icon: AiIcon,
-    title: "Aplikację AI",
+    title: "Aplikacja AI",
     description:
       "Tworzymy przejrzyste, estetyczne i konwersyjne interfejsy. Projektujemy doświadczenia użytkownika oparte na researchu, analizie i dobrych praktykach.",
   },
   {
     icon: SiN8N,
-    title: "Automatyzacje",
+    title: "Automatyzacja",
     description:
       "Specjalizujemy się w zaawansowanych automatyzacjach procesów biznesowych i integracjach z wykorzystaniem Sztucznej Inteligencji, używając platform make.com i n8n.",
   },
@@ -52,13 +59,13 @@ const serviceData = [
   },
   {
     icon: BsGlobe,
-    title: "Stronę Fullstack",
+    title: "Strona Fullstack",
     description:
       "Budujemy dedykowane aplikacje fullstack oparte na technologiach takich jak React, Next.js, Go i Node.js – skalowalne, szybkie i gotowe do dalszego rozwoju.",
   },
   {
     icon: SiWordpress,
-    title: "Stronę WordPress",
+    title: "Strona WordPress",
     description:
       "Projektujemy i wdrażamy nowoczesne, szybkie i łatwe w zarządzaniu strony WordPress, tworząc motywy, integracje oraz personalizacje idealnie dopasowane do Twojego biznesu.",
   },
@@ -71,27 +78,16 @@ const serviceData = [
 ];
 
 // 2. Warianty dla pojedynczego kafelka (bez zmian w stosunku do poprzedniej wersji)
-const tileVariants: Variants = {
-  hidden: { y: -300, opacity: 0, scale: 0.4 },
-  visible: {
-    y: [-200, -50, 0],
-    opacity: [0, 0, 1],
-    scale: [0.2, 1.5, 1],
-    transition: {
-      duration: 0.2,
-      ease: "backInOut",
-    },
-  },
-};
 
 const MainTile: React.FC<ServiceTileProps> = ({
   icon: Icon,
   title,
   description,
+  variants,
 }) => {
   return (
     <motion.div
-      variants={tileVariants}
+      variants={variants}
       className="flex flex-col items-center hover:scale-105 pt-4 px-3 pb-4
     border border-gray-500 hover:cursor-pointer
           bg-white/5 hover:bg-cyan-400/5 backdrop-blur-sm  hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
@@ -108,31 +104,63 @@ const MainTile: React.FC<ServiceTileProps> = ({
   );
 };
 
+const MainTile2: React.FC<ServiceTileProps> = ({
+  icon: Icon,
+  title,
+  description,
+  variants,
+}) => {
+  return (
+    <motion.div
+      variants={variants}
+      className="flex flex-col items-center hover:scale-105 pt-4 px-3 pb-4
+    border border-gray-500 hover:cursor-pointer
+          bg-white/5 hover:bg-cyan-400/5 backdrop-blur-sm  hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
+        rounded-xl shadow-lg  transition duration-300 min-h-[360px] w-full"
+    >
+      <div className="text-4xl text-cyan-400 mb-4">
+        <Icon size={72} />
+      </div>
+      <h3 className="text-3xl font-mono font-semibold text-white mb-2 text-center mx-4">
+        {title}
+      </h3>
+      <p className="text-gray-300 text-center text-xl">{description}</p>
+    </motion.div>
+  );
+};
+
 // --- Komponent About ---
 interface AboutProps {
-  // mainControls nie jest już potrzebne jako prop
+  tiles: TileInfo[];
+  header: React.ReactNode;
+  variant?: "fuchsia" | "cyan";
 }
-
-export const About: React.FC<AboutProps> = () => {
+const tileVariants: Variants = {
+  hidden: { top: -30, x: -40, z: -200, opacity: 0, scaleY: 0.4, scaleX: 0.6 },
+  visible: {
+    top: 0,
+    x: 0,
+    z: 0,
+    opacity: [0, 0, 1],
+    scaleY: [0.6, 0.8, 1],
+    scaleX: [0.6, 0.8, 1],
+    transition: {
+      duration: 0.3,
+      ease: "circInOut",
+    },
+  },
+};
+export const Tiles: React.FC<AboutProps> = ({
+  tiles,
+  header,
+  variant = "fuchsia",
+}) => {
   const headerControl = useAnimationControls();
   const tilesControl = useAnimationControls();
-
-  const headerVariants: Variants = {
-    hidden: { scaleY: 0, scaleX: 0, opacity: 0 },
-    visible: {
-      scaleY: 1,
-      scaleX: 1,
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
   const tilesVariants: Variants = {
     visible: {
       transition: {
-        delayChildren: 0.3,
+        delayChildren: 0.2,
         // ZMIANA: Ustawiamy staggerChildren na >= 0.6s (czas trwania animacji kafelka)
         staggerChildren: 0.2, // Zapewnia pełny pop-up jednego kafelka, zanim rozpocznie się kolejny
       },
@@ -142,7 +170,8 @@ export const About: React.FC<AboutProps> = () => {
   const ref = useRef(null);
   const isInView = useInView(ref);
   const ref2 = useRef(null);
-  const isInView2 = useInView(ref2, { once: true });
+  const isInView2 = useInView(ref2);
+
   useEffect(() => {
     if (isInView) {
       headerControl.start("visible");
@@ -163,19 +192,18 @@ export const About: React.FC<AboutProps> = () => {
     <>
       <motion.section exit="exit" className="flex flex-col gap-16">
         <div ref={ref} />
-
         <motion.div
-          initial="hidden"
-          variants={headerVariants}
-          animate={headerControl} // Teraz kontrolujemy animację lokalnie
-          className="text-4xl max-w-3xl m-auto  text-center font-thin tracking-widest"
+          className="text-4xl h-12 font-bold m-auto text-center  tracking-wide"
+          initial={{ clipPath: "inset( 0 100% 0 0)" }}
+          whileInView={{
+            clipPath: "inset(0% 0 0 0)",
+            transition: { duration: 0.6, ease: "easeOut", delay: 0 },
+          }}
         >
-          Chętnie wykonamy <br></br>
-          dla
-          <b className="font-bold italic"> Ciebie</b>
+          {header}
         </motion.div>
 
-        <div className="max-w-7xl w-full">
+        <div className="max-w-7xl w-full flex flex-col gap-8">
           <motion.div
             variants={tilesVariants}
             ref={ref2}
@@ -183,16 +211,14 @@ export const About: React.FC<AboutProps> = () => {
             animate={tilesControl} // Kontrola także elementów wewnętrznych
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {serviceData.map((service, index) => (
-              <div key={index}>
-                <div className="bg-g"></div>
-                <MainTile
-                  key={service.title}
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.description}
-                />
-              </div>
+            {tiles.map((service, index) => (
+              <MainTile
+                key={service.title}
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+                variants={tileVariants}
+              />
             ))}
           </motion.div>
         </div>
@@ -254,7 +280,7 @@ const containerVariants2: Variants = {
   },
 };
 
-export const About2: React.FC<AboutProps> = () => {
+export const About2: React.FC = () => {
   const headerControl = useAnimationControls(); // Używamy własnych kontrolerów
 
   const tilesVariants: Variants = {

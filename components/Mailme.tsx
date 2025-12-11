@@ -175,8 +175,8 @@ export const MailerButton = ({
       font-bold text-xl
       duration-300 flex items-center justify-center hover:cursor-pointer
   ring-cyan-400 rounded-xl  text-white border border-gray-500 p-2 
-           bg-white/5 hover:bg-cyan-400/5 backdrop-blur-sm 
-            hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
+           bg-white/10 hover:bg-cyan-400/5 backdrop-blur-sm 
+            hover:ring-gray-500 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
 "
     >
       <motion.div

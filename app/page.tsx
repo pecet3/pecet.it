@@ -12,7 +12,7 @@ import { Mailer, MailerButton } from "@/components/Mailme";
 import { OurStack } from "@/components/OurStack";
 import { RotatingCube } from "@/components/Cube";
 import { SceneContainer } from "@/components/Macbook";
-import { About, About2 } from "@/components/About";
+import { About2, serviceData, Tiles } from "@/components/About";
 import Image from "next/image";
 import {
   Terminal,
@@ -84,12 +84,28 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center pt-48 sm:pt-0 px-8 lg:px-24 xl:px-64 pb-16">
       <WelcomeSection setIsOpen={setIsMailOpen} isMobile={isMobile} />
 
-      <div className="flex flex-col items-center gap-48 max-w-6xl my-16">
+      <div className="flex flex-col items-center gap-64 max-w-6xl my-16">
         <MainDescription />
-        <About />
+        <div className="flex flex-col gap-48">
+          <Tiles
+            tiles={serviceData.slice(3, 6)}
+            header={
+              <div className="tracking-wide underline decoration-cyan-400 decoration-wavy decoration">
+                Pokaż się z jak <i className="">najlepszej</i> strony
+              </div>
+            }
+          />
+          <Tiles
+            tiles={serviceData.slice(0, 3)}
+            header={
+              <div className="tracking-wide underline decoration-cyan-400 decoration-wavy decoration">
+                Usprawnij swoją <i>cudowną</i> firmę
+              </div>
+            }
+          />
+        </div>
         <HostingDescription />
-        <Terminal />
-        <About2 />
+        {/* <About2 /> */}
         <Pricing />
       </div>
       {scrollY >= screenSize.height * 0.2 ? (
