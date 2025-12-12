@@ -191,17 +191,18 @@ export const HostingDescription = () => {
   const refT = useRef(null);
   const isInView = useInView(refT);
   return (
-    <section className="flex flex-col gap-16">
-      <div ref={refT} />
+    <section className="flex flex-col relative gap-16">
+      <div ref={refT} className="absolute top-72 bottom-0" />
+
       <motion.div
         className="text-5xl h-16 font-bold m-auto text-center  tracking-wide"
         initial={{ clipPath: "inset( 0 100% 0 0)" }}
         whileInView={{
           clipPath: "inset(0% 0 0 0)",
-          transition: { duration: 0.6, ease: "easeOut", delay: 0 },
+          transition: { duration: 0.6, ease: "easeOut", delay: 1.2 },
         }}
       >
-        <p> Wszystkim u nas masz pod ręką...</p>
+        <p> Wszystko u nas masz pod ręką...</p>
       </motion.div>
       <motion.div
         ref={ref}

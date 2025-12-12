@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navigation } from "@/components/nav/Naviagtion";
 import { Suspense } from "react";
 import { ScrollBackground } from "@/components/ScrollBackground";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,13 @@ export default function RootLayout({
         }
       >
         <ScrollBackground>
+          <Toaster
+            toastOptions={{
+              position: "bottom-center",
+              duration: 5,
+            }}
+          />
+
           <Navigation />
           <Suspense>{children}</Suspense>
         </ScrollBackground>

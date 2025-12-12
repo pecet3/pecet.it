@@ -5,6 +5,7 @@ import { BiMailSend } from "react-icons/bi";
 
 import { motion, AnimatePresence } from "framer-motion"; // <-- Import AnimatePresence
 import { MdOutlineEmail } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const mailContent = {
   content: "Dzień dobry, \n\n",
@@ -32,7 +33,7 @@ export const Mailer = ({
       const res = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ from: email, message: input }),
+        body: JSON.stringify({ email: email, content: input }),
       });
 
       setStatus(res.status);
@@ -41,9 +42,13 @@ export const Mailer = ({
         setInput("");
         setEmail("");
         setIsWritting(false);
+        setIsOpen(false);
+        toast.success(
+          "Wysłano pomyślnie Twoją wiadomość. Wkrótce wyślemy odpowiedź na podanego przez Ciebie maila"
+        );
       }
     } catch {
-      setStatus(500);
+      toast.error("Wysyłanie wiadomości się nie powiodło");
     } finally {
       setLoading(false);
     }
@@ -72,7 +77,7 @@ export const Mailer = ({
             >
               <div className="flex items-end pt-2 m-0 gap-1">
                 <button
-                  className="w-4 h-4 bg-red-500 rounded-full"
+                  className="w-4 h-4 bg-red-500 rounded-full hover:cursor-pointer"
                   type="button"
                   onClick={() => setIsOpen(false)}
                 ></button>
@@ -100,6 +105,7 @@ export const Mailer = ({
                   type="submit"
                   disabled={loading}
                   className="self-end bg-white text-black duration-300 
+                  hover:cursor-pointer
                   font-sans m-0 flex items-center gap-2 px-3 py-2 rounded-lg"
                 >
                   <BiMailSend size={24} />
@@ -119,22 +125,6 @@ export const Mailer = ({
                 }}
                 required
               />
-
-              {status && (
-                <p
-                  className={`text-center font-bold mt-2 ${
-                    status === 200
-                      ? "text-green-400"
-                      : status === 400
-                      ? "text-yellow-400"
-                      : "text-red-500"
-                  }`}
-                >
-                  {status === 200 && "Wiadomość wysłana ✅"}
-                  {status === 400 && "Brak wymaganych danych ⚠️"}
-                  {status === 500 && "Błąd serwera ❌"}
-                </p>
-              )}
             </form>
           </motion.div>
         )}
@@ -172,11 +162,7 @@ export const MailerButton = ({
       onClick={() => setIsOpen(true)}
       className="
        bottom-4 right-4 fixed
-      font-bold text-xl
-      duration-300 flex items-center justify-center hover:cursor-pointer
-  ring-cyan-400 rounded-xl  text-white border border-gray-500 p-2 
-           bg-white/10 hover:bg-cyan-400/5 backdrop-blur-sm 
-            hover:ring-gray-500 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
+    btn
 "
     >
       <motion.div

@@ -31,7 +31,9 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
               <h1 className="text-4xl font-semibold">
                 Przeraża Cię widok kodu?
               </h1>
-              <h2 className="text-5xl font-thin text-center">Zostaw to nam!</h2>
+              <h2 className="text-5xl text-gray-500 font-thin text-center">
+                Zostaw to nam!
+              </h2>
             </div>
             <motion.button
               initial={{ opacity: 0, scale: 0.5 }}
@@ -69,7 +71,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
             className="flex flex-col gap-6 items-center"
           >
             <div>
-              <h1 className="text-4xl font-semibold text-center">
+              <h1 className="text-4xl font-semibold text-slate-200  text-center">
                 Przeraża Cię widok kodu?
               </h1>
               <h2 className="text-5xl font-thin text-center">Zostaw to nam!</h2>
@@ -79,7 +81,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 3.4 }}
-              className="btn bg-white text-black hover:scale-105 duration-300 hover:shadow-lg
+              className="btn bg-white/5 backdrop-blur-sm  hover:scale-105 duration-300 hover:shadow-lg
                shadow-md shadow-gray-900"
             >
               <MdOutlineEmail size={30} />

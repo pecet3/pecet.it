@@ -90,7 +90,7 @@ const MainTile: React.FC<ServiceTileProps> = ({
       variants={variants}
       className="flex flex-col items-center hover:scale-105 pt-4 px-3 pb-4
     border border-gray-500 hover:cursor-pointer
-          bg-white/5 hover:bg-cyan-400/5 backdrop-blur-sm  hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
+          bg-white/5 hover:bg-cyan-400/5 backdrop-blur-xl  hover:ring-cyan-400 hover:ring-2 hover:shadow-xl hover:shadow-cyan-400/20
         rounded-xl shadow-lg  transition duration-300 min-h-[360px] w-full"
     >
       <div className="text-4xl text-fuchsia-500 mb-4">
@@ -136,7 +136,7 @@ interface AboutProps {
   variant?: "fuchsia" | "cyan";
 }
 const tileVariants: Variants = {
-  hidden: { top: -30, x: -40, z: -200, opacity: 0, scaleY: 0.4, scaleX: 0.6 },
+  hidden: { top: -30, x: 120, z: -200, opacity: 0, scaleY: 0.4, scaleX: 0.6 },
   visible: {
     top: 0,
     x: 0,
@@ -160,6 +160,7 @@ export const Tiles: React.FC<AboutProps> = ({
   const tilesVariants: Variants = {
     visible: {
       transition: {
+        delay: 0.6,
         delayChildren: 0.2,
         // ZMIANA: Ustawiamy staggerChildren na >= 0.6s (czas trwania animacji kafelka)
         staggerChildren: 0.2, // Zapewnia pełny pop-up jednego kafelka, zanim rozpocznie się kolejny
@@ -168,7 +169,7 @@ export const Tiles: React.FC<AboutProps> = ({
     hidden: {},
   };
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "0px 100px -50px 0px" });
+  const isInView = useInView(ref);
   const ref2 = useRef(null);
   const isInView2 = useInView(ref2);
 
@@ -190,8 +191,8 @@ export const Tiles: React.FC<AboutProps> = ({
 
   return (
     <>
-      <motion.section exit="exit" className="flex flex-col gap-16">
-        <div ref={ref} />
+      <motion.section exit="exit" className="flex flex-col gap-24 relative">
+        <div ref={ref} className="absolute top-72 bottom-0" />
         <motion.div
           className="text-4xl h-12 font-bold m-auto text-center  tracking-wide"
           initial={{ clipPath: "inset( 0 100% 0 0)" }}
@@ -203,10 +204,11 @@ export const Tiles: React.FC<AboutProps> = ({
           {header}
         </motion.div>
 
-        <div className="max-w-7xl w-full flex flex-col gap-8">
+        <div className="relative max-w-7xl w-full flex flex-col gap-8">
+          <div className="absolute top-72 bottom-0" ref={ref2} />
+
           <motion.div
             variants={tilesVariants}
-            ref={ref2}
             initial="hidden"
             animate={tilesControl} // Kontrola także elementów wewnętrznych
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
