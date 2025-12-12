@@ -24,7 +24,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
           <motion.div
             initial={{ y: -400, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 1, delay: 4.0 }}
+            transition={{ ease: "easeOut", duration: 1, delay: 1.0 }}
             className="flex flex-col gap-6 items-center"
           >
             <div className="text-center">
@@ -38,7 +38,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
             <motion.button
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 4.5, ease: "easeOut" }}
+              transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
               onClick={() => setIsOpen(true)}
               className="btn hover:scale-105 duration-300
                hover:shadow-lg shadow-md shadow-gray-900"
@@ -46,7 +46,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 4.5, ease: "easeOut" }}
+                transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
               >
                 <MdOutlineEmail size={30} />
               </motion.div>
@@ -57,7 +57,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
           <motion.div
             initial={{ y: -200 }}
             animate={{ y: 0 }}
-            transition={{ ease: "easeOut", duration: 0.5, delay: 4.2 }}
+            transition={{ ease: "easeOut", duration: 0.5, delay: 0 }}
           >
             <CodeBlock />
           </motion.div>
@@ -65,9 +65,9 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
       ) : (
         <>
           <motion.div
-            initial={{ x: -400, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.6, delay: 2.9 }}
+            initial={{ y: -200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ ease: "easeOut", duration: 0.6, delay: 1 }}
             className="flex flex-col gap-6 items-center"
           >
             <div>
@@ -80,7 +80,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
               onClick={() => setIsOpen(true)}
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 3.4 }}
+              transition={{ duration: 0.3, delay: 1.4 }}
               className="btn bg-white/5 backdrop-blur-sm  hover:scale-105 duration-300 hover:shadow-lg
                shadow-md shadow-gray-900"
             >
@@ -90,8 +90,8 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({
           </motion.div>
 
           <motion.div
-            initial={{ x: -240 }}
-            animate={{ x: 0 }}
+            initial={{ z: -240 }}
+            animate={{ z: 0 }}
             transition={{ ease: "easeOut", duration: 0.5, delay: 2.5 }}
           >
             <CodeBlock />

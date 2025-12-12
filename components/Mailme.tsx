@@ -66,7 +66,7 @@ export const Mailer = ({
             key="mail-form"
             initial={initialAnimation}
             animate={animateAnimation}
-            exit={initialAnimation} // 👈 odwrotna animacja przy zamknięciu
+            exit={initialAnimation}
             transition={transitionSettings}
           >
             <form
